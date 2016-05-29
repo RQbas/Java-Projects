@@ -1,4 +1,7 @@
-John Smith male 20 190.0 75.0
-Jan Kowalski male 10 170.0 60.0
-Karol Kopernik male 10 180.0 50.0
-Anna Kowalska female 25 165.0 60.0
+John  Smith  male  20  190.0  75.0
+
+Jan  Kowalski  male  10  170.0  60.0
+
+Anna  Kowalska  female  25  165.0  60.0
+
+Rafa³ Kubas male 22 190 85
