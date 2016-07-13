@@ -1,6 +1,7 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,8 +31,12 @@ public class AppWindow extends JFrame implements ActionListener
 	
 	private JLabel[][] Space;
 	
-	public int length=10;
-	public int width=10;
+	Board GoLBoard;
+	
+	public int length=20;
+	public int width=20;
+	
+	
 	
 	public AppWindow() {
 		
@@ -40,14 +45,14 @@ public class AppWindow extends JFrame implements ActionListener
 		CreateJpanel();
 		AddJpanel(BaseFrame, BasePanel);
 		CreateSpace();
-		
-		
+		InitialFields();
 	}
 
 	void CreateJframe(){
 		BaseFrame=new JFrame("Game of Life");
-		BaseFrame.setSize(1024,768);
+		BaseFrame.setSize(getToolkit().getScreenSize().width,getToolkit().getScreenSize().height);
 		BaseFrame.setVisible(true);
+		BaseFrame.setBounds(10, 10, (int) (0.8*getToolkit().getScreenSize().width), (int) (0.8*getToolkit().getScreenSize().height));
 		BaseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -70,8 +75,10 @@ public class AppWindow extends JFrame implements ActionListener
 		AddJbutton(ButtonPanel);
 		
 		BoardPanel=new JPanel();
-		BoardPanel.setLayout(new GridLayout(length, width));
+		BoardPanel.setLayout(new GridLayout(length+1, width+1));
 		BoardPanel.setBackground(Color.lightGray);
+		
+		
 		
 		BasePanel.add(BoardPanel, BorderLayout.CENTER);
 		BasePanel.add(ButtonPanel, BorderLayout.PAGE_END);
@@ -106,37 +113,57 @@ public class AppWindow extends JFrame implements ActionListener
 	}
 	
 	void CreateSpace(){
-		Space= new JLabel[length][width];
+		this.Space= new JLabel[length][width];
 		for(int i=0; i<length; i++){
 			for(int j=0; j<width; j++){
-				SetJLabel(Space[i][j], BoardPanel);
+				Space[i][j]=SetJLabel(this.Space[i][j], BoardPanel);			
 			}
 		}
 	}
-	void SetJLabel(JLabel label, JPanel panel){
+	
+	JLabel SetJLabel(JLabel label, JPanel panel){
 		label= new JLabel();
 		label.setBorder(new LineBorder(Color.BLACK));
+		label.setMinimumSize(new Dimension(10,10));
 		//label.setBackground(Color.darkGray);
 		label.setOpaque(true);
-		label.setSize(10, 10);
 		panel.add(label);
+			return label;		
 	}
-	/*
-	void ChangeFields(){
+	
+	void InitialFields(){
+		 GoLBoard= new Board(length, width);
+		 ChangeFields();
+		}
+	
+	void ChangeFields()
+	{
 		for(int i=0; i<length; i++){
 			for(int j=0; j<width; j++){
-				Space[i][j].setText("Kek");
+					if(GoLBoard.GameBoard[i][j].isAlive())
+						Space[i][j].setBackground(Color.GREEN);
+						else
+						Space[i][j].setBackground(Color.RED);
+					}
 			}
-		}
+			
 	}
-	*/
 
 	@Override
 	public void actionPerformed(ActionEvent E) {
 		String ButtonName=E.getActionCommand();
+		
 		if(ButtonName.equals("Perform Cycle")){
-			System.out.println("Method for performing cycle");
+			GoLBoard.NextTurn();
 			
+			for(int i=0; i<length; i++){
+				for(int j=0; j<width; j++){
+						if(GoLBoard.NextTurnBoard[i][j].isAlive())
+							Space[i][j].setBackground(Color.GREEN);
+							else
+							Space[i][j].setBackground(Color.RED);
+						}
+				}
 		}
 		if(ButtonName.equals("Close"))
 			System.exit(0);
