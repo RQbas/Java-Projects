@@ -1,11 +1,12 @@
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board {
 
 	
-	Unit[][] GameBoard;
-	Unit[][] NextTurnBoard;
+	Unit[][] GameBoard; //Used to check conditions for each cell
+	Unit[][] NextTurnBoard; //Used to keep new scheme of units
 	int BoardLength;
 	int BoardWidth;
 	
@@ -14,67 +15,64 @@ public class Board {
 		SetBoardSize(length, width);
 		CreateGameBoard();
 		SetGameBoard();
-		SetInitialUnits();
 	}
+	
 void SetBoardSize(int x, int y){
 	this.BoardLength=x;
 	this.BoardWidth=y;
 }
+
 void CreateGameBoard(){
 	GameBoard=new Unit[BoardLength][BoardWidth];
 	NextTurnBoard=new Unit[BoardLength][BoardWidth];
 }
+
 void SetGameBoard(){
 	for(int i=0; i<BoardLength; i++){
 		for(int j=0; j<BoardWidth; j++){
 			GameBoard[i][j]=new Unit();
-			}
-		}
-	
-	for(int i=0; i<BoardLength; i++){
-		for(int j=0; j<BoardWidth; j++){
 			NextTurnBoard[i][j]=new Unit();
 			}
 		}
 }
-void SetInitialUnits(){
-	GameBoard[10][11].UnitAlive();
-	GameBoard[10][12].UnitAlive();
-	GameBoard[11][10].UnitAlive();
-	
-	GameBoard[12][13].UnitAlive();
-	GameBoard[13][11].UnitAlive();
-	GameBoard[13][12].UnitAlive();
-	
-	
+int HowManyNeighbors(int x, int y){
+	int NeighborNumber=0;
+	//Row above actual cell
+		if(GameBoard[x-1][y-1].isAlive())
+			NeighborNumber++;
+		if(GameBoard[x-1][y].isAlive())
+			NeighborNumber++;
+		if(GameBoard[x-1][y+1].isAlive())
+			NeighborNumber++;
+		
+		//Row of actual cell
+		if(GameBoard[x][y-1].isAlive())
+			NeighborNumber++;
+		if(GameBoard[x][y+1].isAlive())
+			NeighborNumber++;
+		
+		//Row below actual cell
+		if(GameBoard[x+1][y-1].isAlive())
+			NeighborNumber++;
+		if(GameBoard[x+1][y].isAlive())
+			NeighborNumber++;
+		if(GameBoard[x+1][y+1].isAlive())
+			NeighborNumber++;
+		
+		return NeighborNumber;
 }
+
+
+
 Boolean CheckConditions(int x, int y){
 	
-	int NeighborNumber=0;
+	int NeighborNumber;
+	
+	NeighborNumber=HowManyNeighbors(x, y);
 	Boolean isAliveLater=false;
 	Boolean WasAlive=GameBoard[x][y].isAlive();
 	
-	//Row above actual cell
-	if(GameBoard[x-1][y-1].isAlive())
-		NeighborNumber++;
-	if(GameBoard[x-1][y].isAlive())
-		NeighborNumber++;
-	if(GameBoard[x-1][y+1].isAlive())
-		NeighborNumber++;
 	
-	//Row of actual cell
-	if(GameBoard[x][y-1].isAlive())
-		NeighborNumber++;
-	if(GameBoard[x][y+1].isAlive())
-		NeighborNumber++;
-	
-	//Row below actual cell
-	if(GameBoard[x+1][y-1].isAlive())
-		NeighborNumber++;
-	if(GameBoard[x+1][y].isAlive())
-		NeighborNumber++;
-	if(GameBoard[x+1][y+1].isAlive())
-		NeighborNumber++;
 
 	//RULES
 	if(NeighborNumber==2 || NeighborNumber==3)
@@ -86,9 +84,12 @@ Boolean CheckConditions(int x, int y){
 	}
 	else
 		isAliveLater=false;
+	
+	//Return State
 	return isAliveLater;
 }		
  void NextTurn(){
+	 //Set living units on new board
 	 for(int i=1; i<BoardLength-1; i++){
 			for(int j=1; j<BoardWidth-1; j++){
 				if(CheckConditions(i,j))
@@ -96,9 +97,8 @@ Boolean CheckConditions(int x, int y){
 				else
 					NextTurnBoard[i][j].UnitDie();
 			}
-			}
-	 
-	 
+		}
+	 //Copy new board to the previous one
 	 for(int i=0; i<BoardLength; i++){
 			for(int j=0; j<BoardWidth; j++){
 			if(NextTurnBoard[i][j].isAlive())

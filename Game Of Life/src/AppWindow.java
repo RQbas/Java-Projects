@@ -9,6 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,9 +36,8 @@ public class AppWindow extends JFrame implements ActionListener
 	
 	Board GoLBoard;
 	
-	public int length=20;
-	public int width=20;
-	
+	public int length=30;
+	public int width=30;
 	
 	
 	public AppWindow() {
@@ -44,8 +46,9 @@ public class AppWindow extends JFrame implements ActionListener
 		CreateJbutton();
 		CreateJpanel();
 		AddJpanel(BaseFrame, BasePanel);
-		CreateSpace();
 		InitialFields();
+		CreateSpace();
+		ChangeFields();
 	}
 
 	void CreateJframe(){
@@ -107,48 +110,87 @@ public class AppWindow extends JFrame implements ActionListener
 		ButtonPanel.add(end, Constraints);
 	}
 	
-	
+
 	void AddJpanel(JFrame frame, JPanel panel){
 		frame.add(panel);
 	}
 	
+	//CREATE 2D JLABEL ARRAY
 	void CreateSpace(){
 		this.Space= new JLabel[length][width];
 		for(int i=0; i<length; i++){
 			for(int j=0; j<width; j++){
-				Space[i][j]=SetJLabel(this.Space[i][j], BoardPanel);			
+				Space[i][j]=SetJLabel(this.Space[i][j], BoardPanel, i, j);			
 			}
 		}
 	}
-	
-	JLabel SetJLabel(JLabel label, JPanel panel){
+	//SET JLABELS PARAMETERS
+	JLabel SetJLabel(JLabel label, JPanel panel, int x, int y){
+		
 		label= new JLabel();
 		label.setBorder(new LineBorder(Color.BLACK));
 		label.setMinimumSize(new Dimension(10,10));
 		//label.setBackground(Color.darkGray);
 		label.setOpaque(true);
+		label.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    { 	
+		    GoLBoard.GameBoard[x][y].UnitAlive();
+		    DetermineUnitColor(GoLBoard.HowManyNeighbors(x, y), x, y);
+		    ChangeFields();
+		    }  
+		}); 
 		panel.add(label);
 			return label;		
 	}
 	
+	
+	//INITIALIZE BOARD
 	void InitialFields(){
 		 GoLBoard= new Board(length, width);
-		 ChangeFields();
 		}
 	
+	//DRAWING BOARD ON SCREEN FROM BOARD OBJECT
 	void ChangeFields()
 	{
 		for(int i=0; i<length; i++){
 			for(int j=0; j<width; j++){
 					if(GoLBoard.GameBoard[i][j].isAlive())
-						Space[i][j].setBackground(Color.GREEN);
+					
+						DetermineUnitColor(GoLBoard.HowManyNeighbors(i, j), i, j);
 						else
-						Space[i][j].setBackground(Color.RED);
+						Space[i][j].setBackground(new Color(200,0,0));
 					}
-			}
-			
+			}		
+	}
+	
+	void DetermineUnitColor(int value, int x, int y){
+		switch(value){
+		case 0: Space[x][y].setBackground(new Color(1, 249, 13));
+			break;
+		case 1: Space[x][y].setBackground(new Color(1, 229, 15));;
+			break;	
+		case 2: Space[x][y].setBackground(new Color(1, 209, 15));;
+			break;
+		case 3: Space[x][y].setBackground(new Color(1, 189, 13));
+			break;
+		case 4: Space[x][y].setBackground(new Color(1, 169, 13));
+			break;
+		case 5: Space[x][y].setBackground(new Color(1, 149, 13));
+			break;
+		case 6: Space[x][y].setBackground(new Color(1, 129, 13));
+			break;
+		case 7: Space[x][y].setBackground(new Color(1, 109, 13));
+			break;
+		case 8: Space[x][y].setBackground(new Color(1, 89, 13));
+			break;
+		
+		}
+		
 	}
 
+	//BUTTON ACTIONS
 	@Override
 	public void actionPerformed(ActionEvent E) {
 		String ButtonName=E.getActionCommand();
@@ -159,9 +201,9 @@ public class AppWindow extends JFrame implements ActionListener
 			for(int i=0; i<length; i++){
 				for(int j=0; j<width; j++){
 						if(GoLBoard.NextTurnBoard[i][j].isAlive())
-							Space[i][j].setBackground(Color.GREEN);
+							DetermineUnitColor(GoLBoard.HowManyNeighbors(i, j), i, j);
 							else
-							Space[i][j].setBackground(Color.RED);
+							Space[i][j].setBackground(new Color(200,0,0));
 						}
 				}
 		}
