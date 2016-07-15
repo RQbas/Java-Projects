@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,42 +32,56 @@ public class AppWindow extends JFrame implements ActionListener
 	private JPanel BoardPanel;
 	
 	private JButton start;
+	private JButton TimeButton;
 	private JButton end;
 	
 	private JLabel[][] Space;
+	private JLabel Info;
+
+	
+	private Timer timer;
 	
 	Board GoLBoard;
 	
-	public int length=30;
-	public int width=30;
+	public int length;
+	public int width;
 	
-	
-	public AppWindow() {
-		
+	public static int CycleNumber=0;
+	public static int AddedUnits=0;
+	public AppWindow(int BoardLength, int BoardWidth) {
+		SetSpaceSize( BoardLength, BoardWidth);
 		CreateJframe();
+		
 		CreateJbutton();
 		CreateJpanel();
 		AddJpanel(BaseFrame, BasePanel);
 		InitialFields();
+		
 		CreateSpace();
 		ChangeFields();
+		
+		SetJframe();
 	}
-
 	void CreateJframe(){
 		BaseFrame=new JFrame("Game of Life");
 		BaseFrame.setSize(getToolkit().getScreenSize().width,getToolkit().getScreenSize().height);
-		BaseFrame.setVisible(true);
-		BaseFrame.setBounds(10, 10, (int) (0.8*getToolkit().getScreenSize().width), (int) (0.8*getToolkit().getScreenSize().height));
+		BaseFrame.setBounds(0, 0, (int) (0.8*getToolkit().getScreenSize().width), (int) (0.8*getToolkit().getScreenSize().height));
 		BaseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	void SetJframe(){
+		BaseFrame.setVisible(true);
 	}
 	
 	void CreateJbutton(){
-		 start = new JButton("Perform Cycle");
+		 start = new JButton("Perform 1 Cycle");
 		 end = new JButton("Close");
+		 TimeButton = new JButton("Run");
+		 
 		 
 		 AddJbuttonListener(start);
 		 AddJbuttonListener(end);
-		 
+		 AddJbuttonListener(TimeButton);
 	}
 	
 	void CreateJpanel(){
@@ -73,9 +89,9 @@ public class AppWindow extends JFrame implements ActionListener
 		BasePanel.setBackground(Color.WHITE);
 		
 		ButtonPanel=new JPanel(new GridBagLayout());
-		ButtonPanel.setBackground(Color.GRAY);
-				
-		AddJbutton(ButtonPanel);
+		ButtonPanel.setBackground(Color.GRAY);	
+		SetButtonPanel(ButtonPanel);
+		
 		
 		BoardPanel=new JPanel();
 		BoardPanel.setLayout(new GridLayout(length+1, width+1));
@@ -85,8 +101,6 @@ public class AppWindow extends JFrame implements ActionListener
 		
 		BasePanel.add(BoardPanel, BorderLayout.CENTER);
 		BasePanel.add(ButtonPanel, BorderLayout.PAGE_END);
-		
-		
 	}
 	
 	
@@ -96,18 +110,33 @@ public class AppWindow extends JFrame implements ActionListener
 		Button.addActionListener(this);
 	}
 	
-	void AddJbutton(JPanel Panel){
-		GridBagConstraints Constraints= new GridBagConstraints();
+	void SetButtonPanel(JPanel Panel){
+		Info= new JLabel();
+		Info.setBackground(Color.lightGray);
+		Info.setText("<html>Cycles performed: 0 <br> Units added: 0</html>");
+		Info.setBorder(new LineBorder(Color.BLACK));
+		Info.setOpaque(true);
+	
 		
-		Constraints.insets= new Insets(10, 10, 10, 10);
+		
+		GridBagConstraints Constraints= new GridBagConstraints();
+		Constraints.insets= new Insets(5, 5, 5, 5);
 			
 		Constraints.gridx=0;
-		Constraints.gridy=1;
+		Constraints.gridy=0;
 		ButtonPanel.add(start, Constraints);
+		
+		Constraints.gridx=0;
+		Constraints.gridy=1;
+		ButtonPanel.add(TimeButton, Constraints);
 		
 		Constraints.gridx=0;
 		Constraints.gridy=2;
 		ButtonPanel.add(end, Constraints);
+		
+		Constraints.gridx=1;
+		Constraints.gridy=1;
+		ButtonPanel.add(Info, Constraints);
 	}
 	
 
@@ -116,6 +145,10 @@ public class AppWindow extends JFrame implements ActionListener
 	}
 	
 	//CREATE 2D JLABEL ARRAY
+	void SetSpaceSize(int len, int wid){
+		this.length=len;
+		this.width=wid;
+	}
 	void CreateSpace(){
 		this.Space= new JLabel[length][width];
 		for(int i=0; i<length; i++){
@@ -126,7 +159,6 @@ public class AppWindow extends JFrame implements ActionListener
 	}
 	//SET JLABELS PARAMETERS
 	JLabel SetJLabel(JLabel label, JPanel panel, int x, int y){
-		
 		label= new JLabel();
 		label.setBorder(new LineBorder(Color.BLACK));
 		label.setMinimumSize(new Dimension(10,10));
@@ -136,9 +168,20 @@ public class AppWindow extends JFrame implements ActionListener
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    { 	
-		    GoLBoard.GameBoard[x][y].UnitAlive();
-		    DetermineUnitColor(GoLBoard.HowManyNeighbors(x, y), x, y);
-		    ChangeFields();
+		    	
+		    	if(GoLBoard.GameBoard[x][y].isAlive()){
+		    		AddedUnits--;
+		    		GoLBoard.GameBoard[x][y].UnitDie();
+				    DetermineUnitColor(GoLBoard.HowManyNeighbors(x, y), x, y);
+				    ChangeFields();
+		    	}
+		    	else{
+		    		AddedUnits++;
+		    		GoLBoard.GameBoard[x][y].UnitAlive();
+				    DetermineUnitColor(GoLBoard.HowManyNeighbors(x, y), x, y);
+				    ChangeFields();
+		    	}
+		    	Info.setText("<html>Cycles performed: " +CycleNumber+ "<br> Units added: " +AddedUnits+"</html>");
 		    }  
 		}); 
 		panel.add(label);
@@ -187,6 +230,20 @@ public class AppWindow extends JFrame implements ActionListener
 			break;
 		
 		}
+	}
+	
+	void PerformCycle(){
+		GoLBoard.NextTurn();
+		for(int i=0; i<length; i++){
+			for(int j=0; j<width; j++){
+					if(GoLBoard.NextTurnBoard[i][j].isAlive())
+						DetermineUnitColor(GoLBoard.HowManyNeighbors(i, j), i, j);
+						else
+						Space[i][j].setBackground(new Color(200,0,0));
+					}
+			}
+		CycleNumber++;
+		Info.setText("<html>Cycles performed: " +CycleNumber+ "<br> Units added: " +AddedUnits+"</html>");
 		
 	}
 
@@ -195,18 +252,24 @@ public class AppWindow extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent E) {
 		String ButtonName=E.getActionCommand();
 		
-		if(ButtonName.equals("Perform Cycle")){
-			GoLBoard.NextTurn();
+		if(ButtonName.equals("Perform 1 Cycle"))
+				PerformCycle();
+		if(ButtonName.equals("Run")){
 			
-			for(int i=0; i<length; i++){
-				for(int j=0; j<width; j++){
-						if(GoLBoard.NextTurnBoard[i][j].isAlive())
-							DetermineUnitColor(GoLBoard.HowManyNeighbors(i, j), i, j);
-							else
-							Space[i][j].setBackground(new Color(200,0,0));
-						}
-				}
+			timer= new Timer();
+			timer.schedule(new TimerTask() {
+			    @Override
+			    public void run() {
+			       PerformCycle();
+			    }
+			}, 0, 500);
+			TimeButton.setText("Stop");
+			}
+		if(ButtonName.equals("Stop")){
+			timer.cancel();
+			TimeButton.setText("Run");
 		}
+		
 		if(ButtonName.equals("Close"))
 			System.exit(0);
 			
