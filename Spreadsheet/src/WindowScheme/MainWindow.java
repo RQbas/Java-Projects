@@ -1,5 +1,7 @@
 package WindowScheme;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+
 import java.awt.*;
 
 public class MainWindow {
@@ -11,10 +13,17 @@ public class MainWindow {
 			
 			CreateMainFrame(GetScreenSize());
 			CreateMainPanel();
-			AddMenuBar(MenuBar.CreateMenuBar());
-			//AddStandardToolbar();
-			//AddFormattingToolbar();
-			//AddFormulaBar();
+			
+			AddMenuBar(MenuBar.CreateMenuBar(), GetScreenSize());
+			
+			AddStandardToolbar(StandardToolbar.CreateStandardToolbar(),  GetScreenSize());
+			
+			AddFormattingToolbar(FormattingToolbar.CreateFormattingToolbar(),  GetScreenSize());
+			
+			AddFormulaBar(FormulaBar.CreateFormulaBar(GetScreenSize()),  GetScreenSize());
+			
+			AddWorkArea(WorkArea.CreateWorkArea(GetScreenSize()),  GetScreenSize());
+			
 			SetJframe();
 		}
 		
@@ -34,29 +43,45 @@ public class MainWindow {
 				
 		}
 		void CreateMainPanel(){
+			
+			
+			
 			MainPanel= new JPanel();
-			MainPanel.setBackground(Color.CYAN);	
+			MainPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
+			MainPanel.setBackground(Color.GRAY);	
+			MainPanel.setLayout(new BoxLayout(MainPanel, BoxLayout.Y_AXIS));
+			
 		}
 		
 		
-		void AddMenuBar(JPanel MenuBar){
+		void AddMenuBar(JPanel MenuBar, Dimension ScreenSize){
+			MenuBar.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.03*ScreenSize.height)));
 			MainPanel.add(MenuBar);
 		}
-		void AddStandardToolbar(JPanel StandardToolbar){
+		void AddStandardToolbar(JPanel StandardToolbar, Dimension ScreenSize){
+			StandardToolbar.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.04*ScreenSize.height)));
 			MainPanel.add(StandardToolbar);
 		}
-		void AddFormulaBar(JPanel FormulaBar) {
+		void AddFormulaBar(JPanel FormulaBar, Dimension ScreenSize) {
+			FormulaBar.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.04*ScreenSize.height)));
 			MainPanel.add(FormulaBar);
 			
 		}
-		void AddFormattingToolbar(JPanel FormattingToolbar) {
+		void AddFormattingToolbar(JPanel FormattingToolbar, Dimension ScreenSize) {
+			FormattingToolbar.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.04*ScreenSize.height)));
 			MainPanel.add(FormattingToolbar);
 			
+		}
+		void AddWorkArea(JPanel WorkArea, Dimension ScreenSize) {
+			WorkArea.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.85*ScreenSize.height)));
+			MainPanel.add(WorkArea);
 		}
 		
 		
 		
-		
+		static void SetRigidArea(JPanel Panel, Dimension Size, double x, double y){
+			Panel.add(Box.createRigidArea(new Dimension((int) (x*Size.width), (int) (y*Size.height))));
+		}
 		
 		
 		void SetJframe(){
