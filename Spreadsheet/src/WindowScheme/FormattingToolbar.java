@@ -10,7 +10,7 @@ import javax.swing.border.BevelBorder;
 public class FormattingToolbar {
 static JPanel panel;
 	
-	static JPanel CreateFormattingToolbar(){
+	static JPanel createFormattingToolbar(){
 		panel= new JPanel();
 		panel.setBackground(new Color(211,218,237));
 		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));

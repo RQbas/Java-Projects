@@ -11,50 +11,52 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Functionality.WorkAreaFunctionality;
+
+import mouseListener.WorkAreaMouseListener;
 
 public class WorkArea {
 static JPanel panel;
-static JTable WorkTable;
+static public JTable WorkTable;
 static Object[][] rowData;
-static Object[] columnNames;
+static public Object[] columnNames;
 static final int RowNumber=151;
 static final int ColumnNumber=27;
 
-	static JPanel CreateWorkArea(Dimension ScreenSize){
+	static JPanel createWorkArea(Dimension ScreenSize){
 		panel= new JPanel();
 		panel.setBackground(new Color(216,216,216));
 		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
-		panel.add(CreateScrollPane(ScreenSize));
+		panel.add(createScrollPane(ScreenSize));
 		return panel;
 	}
-	static JScrollPane CreateScrollPane(Dimension Size){
-		CreateTable();
-		 JScrollPane scrollPane= new JScrollPane(CreateTable());
+	static JScrollPane createScrollPane(Dimension Size){
+		createTable();
+		 JScrollPane scrollPane= new JScrollPane(createTable());
 		 scrollPane.setPreferredSize(new Dimension((int) (0.98*Size.width), (int) (0.82*Size.height)));
 		 scrollPane.getViewport().setBackground(new Color(255, 255, 255));
 		return scrollPane;
 	}
-		static JTable CreateTable(){
-			SetRowData();
-			SetColumnNames();
-			DefaultTableModel model = new DefaultTableModel(rowData, columnNames);
-			 WorkTable = new JTable(model);
+		static JTable createTable(){
+			setRowData();
+			setColumnNames();
+			DefaultTableModel model = new  DefaultTableModel(rowData, columnNames);
+			 WorkTable = new JTable();
+			 	WorkTable.setModel(model);
 			    WorkTable.setBackground(new Color(255, 255, 255));
 			    WorkTable.setRowSelectionAllowed(true);
 			    WorkTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			    WorkTable.setDefaultEditor(Object.class, null); //Blocks editing
-			
+			    WorkTable.addMouseListener(new WorkAreaMouseListener());
 			    
 			    return WorkTable;
 		}
-			static void SetRowData(){
+			static void setRowData(){
 				rowData= new Object[RowNumber][ColumnNumber];
 				for(int i=0; i<RowNumber; i++){
 					rowData[i][0]=Integer.toString((i+1));
 				}
 			}
-			static void SetColumnNames(){
+			static void setColumnNames(){
 				columnNames= new Object[ColumnNumber];
 				int LetterASCII=64;
 				columnNames[0]="";

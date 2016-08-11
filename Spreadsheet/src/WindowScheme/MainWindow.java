@@ -14,15 +14,15 @@ public class MainWindow {
 			CreateMainFrame(GetScreenSize());
 			CreateMainPanel();
 			
-			AddMenuBar(MenuBar.CreateMenuBar(), GetScreenSize());
+			AddMenuBar(MenuBar.createMenuBar(), GetScreenSize());
 			
-			AddStandardToolbar(StandardToolbar.CreateStandardToolbar(),  GetScreenSize());
+			AddStandardToolbar(StandardToolbar.createStandardToolbar(),  GetScreenSize());
 			
-			AddFormattingToolbar(FormattingToolbar.CreateFormattingToolbar(),  GetScreenSize());
+			AddFormattingToolbar(FormattingToolbar.createFormattingToolbar(),  GetScreenSize());
 			
-			AddFormulaBar(FormulaBar.CreateFormulaBar(GetScreenSize()),  GetScreenSize());
+			AddFormulaBar(FormulaBar.createFormulaBar(GetScreenSize()),  GetScreenSize());
 			
-			AddWorkArea(WorkArea.CreateWorkArea(GetScreenSize()),  GetScreenSize());
+			AddWorkArea(WorkArea.createWorkArea(GetScreenSize()),  GetScreenSize());
 			
 			SetJframe();
 		}
