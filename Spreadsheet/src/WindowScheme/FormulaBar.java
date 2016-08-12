@@ -37,7 +37,9 @@ static void setCoordinates(Dimension Size){
 	Coordinates= new JTextField("Position");
 	Coordinates.setHorizontalAlignment(JTextField.CENTER);
 	Coordinates.setMaximumSize(new Dimension((int) (0.15*Size.width), (int) (0.025*Size.height)));
+	
 	Coordinates.addMouseListener(new FormulaBarMouseListener());
+	Coordinates.addActionListener(new FormulaBarActionListener());
 }
 static void setInputLine(Dimension Size){
 	InputLine= new JTextField("Input line");

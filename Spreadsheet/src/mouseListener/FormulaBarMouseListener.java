@@ -2,11 +2,14 @@ package mouseListener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JTextField;
 
 import WindowScheme.FormulaBar;
 import WindowScheme.WorkArea;
+import actionListener.FormulaBarActionListener;
 
 public class FormulaBarMouseListener implements MouseListener{
 	@Override
@@ -18,7 +21,8 @@ public class FormulaBarMouseListener implements MouseListener{
 		else if(FormulaBar.InputLine.isFocusOwner()){
 			FormulaBar.InputLine.setText("");
 			FormulaBar.InputLine.setHorizontalAlignment(JTextField.LEFT);
-		}
+
+			}
 		
 		
 	}

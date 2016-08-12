@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +46,9 @@ static final int ColumnNumber=27;
 			 	WorkTable.setModel(model);
 			    WorkTable.setBackground(new Color(255, 255, 255));
 			    WorkTable.setRowSelectionAllowed(true);
-			    WorkTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			    WorkTable.setCellSelectionEnabled(true);
+			 //   WorkTable.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()));
+			    WorkTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 			    WorkTable.setDefaultEditor(Object.class, null); //Blocks editing
 			    WorkTable.addMouseListener(new WorkAreaMouseListener());
 			    
@@ -64,4 +68,16 @@ static final int ColumnNumber=27;
 					columnNames[i]= Character.toString((char)(LetterASCII+i));
 				}
 			}
+			public static int getColumnNameIndex(String s){
+				int index = 0;
+				 for(int i=0; i<columnNames.length; i++){
+					 if(s.equals(WorkArea.columnNames[i])){
+						 index=i;
+					 		}
+				 		}
+				 return index;
+				}
+			
+			
+			
 }
