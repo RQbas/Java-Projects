@@ -1,15 +1,13 @@
-package actionListener;
+package eventFormulaBar;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
-
 import WindowScheme.FormulaBar;
 import WindowScheme.WorkArea;
 
-public class FormulaBarActionListener implements ActionListener{
+public class ActionListenerFB implements ActionListener{
 	static int row;
 	static int col;
 	static Rectangle VisibleArea;
@@ -22,17 +20,9 @@ public class FormulaBarActionListener implements ActionListener{
 			
 		}
 		else if(FormulaBar.InputLine.isFocusOwner()){
-			sendTextToTable();
 			WorkArea.WorkTable.requestFocus();
 		}
 	}
-		public static void sendTextToTable(){
-			String Input=FormulaBar.InputLine.getText();
-			 row=WorkArea.WorkTable.getSelectedRow();
-			 col=WorkArea.WorkTable.getSelectedColumn();
-			WorkArea.WorkTable.setValueAt(Input, row, col);
-			
-		}
 		public static void checkCoordinatesCorrect(String input){
 			String ColumnName;
 			int Row = 0;
@@ -64,3 +54,5 @@ public class FormulaBarActionListener implements ActionListener{
 		}
 		
 }
+
+

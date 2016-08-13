@@ -1,17 +1,13 @@
-package mouseListener;
+package eventFormulaBar;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JTextField;
 
 import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
-import actionListener.FormulaBarActionListener;
 
-public class FormulaBarMouseListener implements MouseListener{
+public class MouseListenerFB implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent TextFieldClick) {
 		
@@ -19,9 +15,7 @@ public class FormulaBarMouseListener implements MouseListener{
 			FormulaBar.Coordinates.setText("");
 		}
 		else if(FormulaBar.InputLine.isFocusOwner()){
-			FormulaBar.InputLine.setText("");
-			FormulaBar.InputLine.setHorizontalAlignment(JTextField.LEFT);
-
+			changeInputLine();
 			}
 		
 		
@@ -47,6 +41,16 @@ public class FormulaBarMouseListener implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+	static void changeInputLine(){
+		if(FormulaBar.InputLine.getText().equals("Input line")){
+			FormulaBar.InputLine.setHorizontalAlignment(JTextField.LEFT);
+			FormulaBar.InputLine.setText("");}
+		else{
+			FormulaBar.InputLine.setText(FormulaBar.InputLine.getText());
+			FormulaBar.InputLine.setHorizontalAlignment(JTextField.LEFT);
+		}
 		
 	}
 }

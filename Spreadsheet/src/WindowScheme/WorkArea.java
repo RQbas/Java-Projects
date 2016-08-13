@@ -14,11 +14,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import mouseListener.WorkAreaMouseListener;
+import eventWorkArea.*;
 
 public class WorkArea {
 static JPanel panel;
 static public JTable WorkTable;
+static DefaultCellEditor JTableEditor;
 static Object[][] rowData;
 static public Object[] columnNames;
 static final int RowNumber=151;
@@ -42,15 +43,16 @@ static final int ColumnNumber=27;
 			setRowData();
 			setColumnNames();
 			DefaultTableModel model = new  DefaultTableModel(rowData, columnNames);
+		    JTableEditor=new DefaultCellEditor(new JTextField());
 			 WorkTable = new JTable();
 			 	WorkTable.setModel(model);
 			    WorkTable.setBackground(new Color(255, 255, 255));
 			    WorkTable.setRowSelectionAllowed(true);
 			    WorkTable.setCellSelectionEnabled(true);
-			 //   WorkTable.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()));
+			    WorkTable.setDefaultEditor(Object.class, JTableEditor);
 			    WorkTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-			    WorkTable.setDefaultEditor(Object.class, null); //Blocks editing
-			    WorkTable.addMouseListener(new WorkAreaMouseListener());
+			    
+			    WorkTable.addMouseListener(new MouseListenerWA());
 			    
 			    return WorkTable;
 		}

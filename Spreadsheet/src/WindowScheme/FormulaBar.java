@@ -8,8 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
-import actionListener.FormulaBarActionListener;
-import mouseListener.FormulaBarMouseListener;
+import eventFormulaBar.*;
 
 public class FormulaBar {
 static JPanel panel;
@@ -38,16 +37,17 @@ static void setCoordinates(Dimension Size){
 	Coordinates.setHorizontalAlignment(JTextField.CENTER);
 	Coordinates.setMaximumSize(new Dimension((int) (0.15*Size.width), (int) (0.025*Size.height)));
 	
-	Coordinates.addMouseListener(new FormulaBarMouseListener());
-	Coordinates.addActionListener(new FormulaBarActionListener());
+	Coordinates.addMouseListener(new MouseListenerFB());
+	Coordinates.addActionListener(new ActionListenerFB());
 }
 static void setInputLine(Dimension Size){
 	InputLine= new JTextField("Input line");
 	InputLine.setHorizontalAlignment(JTextField.CENTER);
 	InputLine.setMaximumSize(new Dimension((int) (0.85*Size.width), (int) (0.025*Size.height)));
 	
-	InputLine.addMouseListener(new FormulaBarMouseListener());
-	InputLine.addActionListener(new FormulaBarActionListener());
+	InputLine.addMouseListener(new MouseListenerFB());
+	InputLine.addActionListener(new ActionListenerFB());
+	InputLine.getDocument().addDocumentListener(new DocumentListenerFB(InputLine));
 }
 
 }
