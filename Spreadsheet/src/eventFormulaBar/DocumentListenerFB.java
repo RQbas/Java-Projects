@@ -6,6 +6,7 @@ import javax.swing.event.DocumentListener;
 
 import WindowScheme.FormulaBar;
 import WindowScheme.WorkArea;
+import eventWorkArea.FormulaMode;
 
 public class DocumentListenerFB  implements DocumentListener{
 	 private JTextField textField;
@@ -18,6 +19,7 @@ public class DocumentListenerFB  implements DocumentListener{
 	@Override
 	public void changedUpdate(DocumentEvent ChangeEvent) {
 		sendTextToTable();
+		
 	}
 	@Override
 	public void insertUpdate(DocumentEvent InsertEvent) {
@@ -35,6 +37,7 @@ public class DocumentListenerFB  implements DocumentListener{
 		 int row=WorkArea.WorkTable.getSelectedRow();
 		 int col=WorkArea.WorkTable.getSelectedColumn();
 		WorkArea.WorkTable.setValueAt(Input, row, col);
+		FormulaMode.trySetFormulaMode(Input);
 		
 	}
 }

@@ -1,7 +1,9 @@
 package eventWorkArea;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -9,24 +11,31 @@ import WindowScheme.FormulaBar;
 import WindowScheme.WorkArea;
 
 public class DocumentListenerWA implements DocumentListener{
-
+ private JTextField textField;
+	 
+	 
+	 public DocumentListenerWA(JTextField textField){
+		 this.textField = textField; 
+	 }
 	@Override
 	public void changedUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		WorkArea.CellContent=textField.getText();
+		FormulaBar.InputLine.setText(WorkArea.CellContent);
+		FormulaMode.trySetFormulaMode(WorkArea.CellContent);
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		WorkArea.CellContent=textField.getText();
+		FormulaBar.InputLine.setText(WorkArea.CellContent);
+		FormulaMode.trySetFormulaMode(WorkArea.CellContent);
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		WorkArea.CellContent=textField.getText();
+		FormulaBar.InputLine.setText(WorkArea.CellContent);
+		FormulaMode.trySetFormulaMode(WorkArea.CellContent);
 	}
-
 	}
 
