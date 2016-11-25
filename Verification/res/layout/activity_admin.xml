@@ -6,31 +6,45 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.app.verification.activity.MainActivity" >
-        
-        <Button
-        android:id="@+id/buttonStatus"
+    tools:context="com.app.verification.AdminActivity" >
+
+  <TextView
+    	android:id="@+id/adminTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
+
+<Button
+        android:id="@+id/buttonDeleteNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Status" />
-        
-        <Button
-        android:id="@+id/buttonLogs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="Logs" />
-        
-        <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_centerHorizontal="true"
-        android:text="Settings" />
-        
+        android:text="Delete Number" />
 
+
+<Button
+        android:id="@+id/buttonClearTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Clear Table" />
+
+
+
+
+   <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true" >
+ 
+    </ListView>
 </RelativeLayout>
