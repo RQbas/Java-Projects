@@ -3,6 +3,7 @@ package devicelist;
 import java.util.ArrayList;
 
 import com.app.verification.R;
+import com.app.verification.StatusActivity;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,17 +14,21 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import database.Device;
 
 public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Device> list = new ArrayList<Device>();
     private Context context;
     TextView deviceName;
+    TextView deviceList;
     Button statusButton;
 
 
-    public DeviceListAdapter(ArrayList<Device> list, Context context) {
+    public DeviceListAdapter(ArrayList<Device> list, Context context, TextView textview, StatusActivity a) {
         this.list = list;
         this.context = context;
+        this.deviceList = textview;
+
     }
 
 
@@ -56,11 +61,10 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_device, null);
         }
-
         deviceName = (TextView) view.findViewById(R.id.deviceName);
         deviceName.setText(list.get(position).getName());
 
-        // Handle buttons and add onClickListeners
+
         statusButton = (Button) view.findViewById(R.id.statusButton);
         statusButton.setText(list.get(position).displayForButton());
         statusButton.setTag(position);
@@ -69,13 +73,21 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         statusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int position = (Integer) v.getTag();
-                statusButton.setText(list.get(position).displayForButton());
+
                 list.get(position).changeStatus();
                 setButtonColor(list.get(position).isOn());
+                statusButton.setText(list.get(position).displayForButton());
+                // deviceList.setText(list.get(position).toString());
+                StatusActivity.getDevicePosition(position);
                 notifyDataSetChanged();
             }
+
+
         });
+
+
 
         return view;
 
@@ -83,6 +95,10 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
 
     }
 
+
+    public ArrayList<Device> getList() {
+        return this.list;
+    }
 
     void setButtonColor(boolean isOn) {
         if (isOn)

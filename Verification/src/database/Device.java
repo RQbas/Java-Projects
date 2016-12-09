@@ -1,17 +1,17 @@
-package devicelist;
+package database;
 
 public class Device {
-    private long id;
+    private int id;
     private String name;
     private boolean isOn;
 
-    public Device(int id, String name) {
-        this.setId(id);
+    public Device(int id, String name, boolean isON) {
+        this.id = id;
         this.name = name;
-        this.isOn = false;
+        this.isOn = isOn;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -43,8 +43,14 @@ public class Device {
 
     }
 
-    void changeStatus() {
+    public void changeStatus() {
         this.isOn = !this.isOn;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getId() + ") " + getName() + " " + String.valueOf(isOn());
+
     }
 
 
