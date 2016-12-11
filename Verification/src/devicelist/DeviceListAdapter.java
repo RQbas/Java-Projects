@@ -20,15 +20,12 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Device> list = new ArrayList<Device>();
     private Context context;
     TextView deviceName;
-    TextView deviceList;
     Button statusButton;
 
 
-    public DeviceListAdapter(ArrayList<Device> list, Context context, TextView textview, StatusActivity a) {
+    public DeviceListAdapter(ArrayList<Device> list, Context context) {
         this.list = list;
         this.context = context;
-        this.deviceList = textview;
-
     }
 
 
@@ -77,22 +74,15 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
                 int position = (Integer) v.getTag();
 
                 list.get(position).changeStatus();
+                StatusActivity.updateDeviceList(list);
+
                 setButtonColor(list.get(position).isOn());
                 statusButton.setText(list.get(position).displayForButton());
-                // deviceList.setText(list.get(position).toString());
-                StatusActivity.getDevicePosition(position);
+
                 notifyDataSetChanged();
             }
-
-
         });
-
-
-
         return view;
-
-
-
     }
 
 

@@ -129,6 +129,11 @@ public class DatabaseAdapter {
         return device;
     }
 
+    public boolean deleteDevice(int id) {
+        String where = KEY_ID + "=" + id;
+        return db.delete(DB_DEVICE_TABLE, where, null) > 0;
+    }
+
 
     public void clearDeviceTable() {
         db.execSQL("DELETE FROM " + DB_DEVICE_TABLE);

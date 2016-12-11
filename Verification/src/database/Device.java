@@ -5,7 +5,7 @@ public class Device {
     private String name;
     private boolean isOn;
 
-    public Device(int id, String name, boolean isON) {
+    public Device(int id, String name, boolean isOn) {
         this.id = id;
         this.name = name;
         this.isOn = isOn;

@@ -15,11 +15,10 @@ import devicelist.DeviceListAdapter;
 @SuppressLint("NewApi")
 public class StatusActivity extends ActionBarActivity {
     ListView deviceList;
-    TextView statusTextView;
+    static TextView statusTextView;
     DeviceListAdapter adapterDL;
-    ArrayList<Device> list;
+    static ArrayList<Device> list;
     DatabaseAdapter db;
-    static int indexDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,34 +26,31 @@ public class StatusActivity extends ActionBarActivity {
         setContentView(R.layout.activity_status);
         setDatabase();
         setTextView();
-        setDeviceList(statusTextView);
+        setDeviceList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        updateDeviceListDB();
+        super.onDestroy();
     }
 
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());
         db.open();
-
-    }
-
-    public void setDeviceList(TextView textview) {
-        createDevices(list);
-        list = db.getAllDevices();
-        adapterDL = new DeviceListAdapter(list, this, textview, this);
-        deviceList = (ListView) findViewById(R.id.deviceList);
-        deviceList.setAdapter(adapterDL);
-        statusTextView.setText(String.valueOf(indexDevice));
-
-
-    }
-
-    static public void getDevicePosition(int position) {
-        indexDevice = position;
-
     }
 
     public void setTextView() {
         statusTextView = (TextView) findViewById(R.id.statusTextView);
         statusTextView.setText("Device List");
+    }
+
+    public void setDeviceList() {
+        createDevices(list);
+        list = db.getAllDevices();
+        adapterDL = new DeviceListAdapter(list, this);
+        deviceList = (ListView) findViewById(R.id.deviceList);
+        deviceList.setAdapter(adapterDL);
     }
 
     public void createDevices(ArrayList<Device> list) {
@@ -65,6 +61,16 @@ public class StatusActivity extends ActionBarActivity {
         }
 
     }
+
+    static public void updateDeviceList(ArrayList<Device> overridingList) {
+        list = overridingList;
+    }
+
+    public void updateDeviceListDB() {
+        for (Device device : list)
+            db.updateDevice(device);
+    }
+
 
 
 }
