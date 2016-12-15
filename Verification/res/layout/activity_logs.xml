@@ -9,8 +9,21 @@
     tools:context="com.app.verification.LogsActivity" >
 
     <TextView
+   		android:id="@+id/logTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+         />
+        
+       <ListView
+        android:id="@+id/logList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true" >
+ 
+    </ListView>
 
 </RelativeLayout>

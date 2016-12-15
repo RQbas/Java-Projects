@@ -9,15 +9,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import database.DatabaseAdapter;
 import database.Device;
+import database.Log;
 import devicelist.DeviceListAdapter;
 
 
 @SuppressLint("NewApi")
 public class StatusActivity extends ActionBarActivity {
     ListView deviceList;
-    static TextView statusTextView;
+    TextView statusTextView;
     DeviceListAdapter adapterDL;
     static ArrayList<Device> list;
+    static ArrayList<Log> logList;
+    static ArrayList<String> phoneList;
     DatabaseAdapter db;
 
     @Override
@@ -26,13 +29,27 @@ public class StatusActivity extends ActionBarActivity {
         setContentView(R.layout.activity_status);
         setDatabase();
         setTextView();
+        setLogList();
         setDeviceList();
+
+    }
+
+    public void setLogList() {
+        logList = new ArrayList<Log>();
     }
 
     @Override
     protected void onDestroy() {
         updateDeviceListDB();
+        updateLogList();
         super.onDestroy();
+    }
+
+    private void updateLogList() {
+        for (Log log : logList)
+            db.insertLog(log);
+        logList.clear();
+
     }
 
     private void setDatabase() {
@@ -48,7 +65,8 @@ public class StatusActivity extends ActionBarActivity {
     public void setDeviceList() {
         createDevices(list);
         list = db.getAllDevices();
-        adapterDL = new DeviceListAdapter(list, this);
+        phoneList = db.getAllOnlyNumbers();
+        adapterDL = new DeviceListAdapter(list, this, phoneList);
         deviceList = (ListView) findViewById(R.id.deviceList);
         deviceList.setAdapter(adapterDL);
     }
@@ -65,6 +83,12 @@ public class StatusActivity extends ActionBarActivity {
     static public void updateDeviceList(ArrayList<Device> overridingList) {
         list = overridingList;
     }
+
+    static public void addLog(Log log) {
+        logList.add(log);
+    }
+
+
 
     public void updateDeviceListDB() {
         for (Device device : list)

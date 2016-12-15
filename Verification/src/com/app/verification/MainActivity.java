@@ -12,6 +12,8 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 
     public Button buttonSettings;
+    public Button buttonStatus;
+    public Button buttonLogs;
     private SQLiteDatabase db;
 
 
@@ -22,15 +24,16 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         setSettingButton();
         setStatusButton();
+        setLogButton();
     }
 
     public void setStatusButton() {
-        buttonSettings = (Button) findViewById(R.id.buttonStatus);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
+        buttonStatus = (Button) findViewById(R.id.buttonStatus);
+        buttonStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSettings = new Intent(MainActivity.this, StatusActivity.class);
-                startActivity(intentSettings);
+                Intent intentStatus = new Intent(MainActivity.this, StatusActivity.class);
+                startActivity(intentStatus);
             }
         });
     }
@@ -42,6 +45,18 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intentSettings);
+            }
+        });
+    }
+
+
+    public void setLogButton() {
+        buttonLogs = (Button) findViewById(R.id.buttonLogs);
+        buttonLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLogs = new Intent(MainActivity.this, LogsActivity.class);
+                startActivity(intentLogs);
             }
         });
     }

@@ -20,7 +20,9 @@ import database.PhoneNumber;
 public class AdminActivity extends ActionBarActivity {
     DatabaseAdapter db;
     Button deleteButton;
-    Button clearButton;
+    Button clearPhoneButton;
+    Button clearDeviceButton;
+    Button clearLogButton;
     TextView adminTextView;
     ListView listNumbers;
     List<PhoneNumber> numbers;
@@ -34,7 +36,9 @@ public class AdminActivity extends ActionBarActivity {
         setDatabase();
         setTextView();
         setDeleteButton();
-        setClearButton();
+        setClearPhoneButton();
+        setClearDeviceButton();
+        setClearLogButton();
         setNumberList();
 
     }
@@ -50,9 +54,9 @@ public class AdminActivity extends ActionBarActivity {
         adminTextView.setText("Admin panel");
     }
 
-    public void setClearButton() {
-        clearButton = (Button) findViewById(R.id.buttonClearTable);
-        clearButton.setOnClickListener(new View.OnClickListener() {
+    public void setClearPhoneButton() {
+        clearPhoneButton = (Button) findViewById(R.id.buttonClearPhoneTable);
+        clearPhoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db.clearPhoneTable();
@@ -60,6 +64,25 @@ public class AdminActivity extends ActionBarActivity {
         });
     }
 
+    public void setClearDeviceButton() {
+        clearDeviceButton = (Button) findViewById(R.id.buttonClearDeviceTable);
+        clearDeviceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.clearDeviceTable();
+            }
+        });
+    }
+
+    public void setClearLogButton() {
+        clearLogButton = (Button) findViewById(R.id.buttonClearLogTable);
+        clearLogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.clearLogsTable();
+            }
+        });
+    }
 
 
     public void setDeleteButton() {

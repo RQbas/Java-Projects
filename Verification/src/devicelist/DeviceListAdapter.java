@@ -15,17 +15,21 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import database.Device;
+import database.Log;
+import manager.ManagerSMS;
 
 public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Device> list = new ArrayList<Device>();
     private Context context;
+    ManagerSMS managerSMS;
     TextView deviceName;
     Button statusButton;
 
 
-    public DeviceListAdapter(ArrayList<Device> list, Context context) {
+    public DeviceListAdapter(ArrayList<Device> list, Context context, ArrayList<String> phoneList) {
         this.list = list;
         this.context = context;
+        managerSMS = new ManagerSMS(phoneList);
     }
 
 
@@ -74,16 +78,24 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
                 int position = (Integer) v.getTag();
 
                 list.get(position).changeStatus();
+                Log log = new Log(list.get(position).getName(), list.get(position).isOn());
+
                 StatusActivity.updateDeviceList(list);
+                StatusActivity.addLog(log);
+
+                managerSMS.setMSG(log.toStringSMS());
+                managerSMS.sendSMS();
 
                 setButtonColor(list.get(position).isOn());
                 statusButton.setText(list.get(position).displayForButton());
+
 
                 notifyDataSetChanged();
             }
         });
         return view;
     }
+
 
 
     public ArrayList<Device> getList() {

@@ -18,7 +18,7 @@
 
 
 
-<Button
+	<Button
         android:id="@+id/buttonDeleteNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,23 +27,36 @@
         android:text="Delete Number" />
 
 
-<Button
-        android:id="@+id/buttonClearTable"
+	<Button
+        android:id="@+id/buttonClearPhoneTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="Clear Table" />
+        android:text="Clear Phone Table" />
+        
+        <Button
+        android:id="@+id/buttonClearDeviceTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="Clear Device Table" />
 
-
-
+		<Button
+        android:id="@+id/buttonClearLogTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="Clear Log Table" />
 
    <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true" >
  
     </ListView>

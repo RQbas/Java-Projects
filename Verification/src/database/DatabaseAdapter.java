@@ -43,6 +43,24 @@ public class DatabaseAdapter {
     static final String DROP_DEVICE_TABLE = "DROP TABLE IF EXISTS " + DB_DEVICE_TABLE;
 
 
+    static final String DB_LOGS_TABLE = "logs";
+
+    static final String LOG_KEY_DATE = "date";
+    static final String LOG_DATE_OPTIONS = "TEXT";
+    static final int LOG_DATE_COLUMN = 1;
+
+    static final String LOG_KEY_NAME = "name";
+    static final String LOG_NAME_OPTIONS = "TEXT";
+    static final int LOG_NAME_COLUMN = 2;
+
+    static final String LOG_KEY_ACTIVE = "active";
+    static final String LOG_ACTIVE_OPTIONS = "TEXT";
+    static final int LOG_ACTIVE_COLUMN = 3;
+
+    static final String DB_CREATE_LOGS_TABLE = "CREATE TABLE " + DB_LOGS_TABLE + "( " + KEY_ID + " " + ID_OPTIONS + ", "
+            + LOG_KEY_DATE + " " + LOG_DATE_OPTIONS + ", " + LOG_KEY_NAME + " " + LOG_NAME_OPTIONS + ", "
+            + LOG_KEY_ACTIVE + " " + LOG_ACTIVE_OPTIONS + ");";
+    static final String DROP_LOGS_TABLE = "DROP TABLE IF EXISTS " + DB_LOGS_TABLE;
 
     private SQLiteDatabase db;
     private Context context;
@@ -71,6 +89,14 @@ public class DatabaseAdapter {
         return DB_NAME;
     }
 
+    public void insertLog(Log log) {
+        ContentValues newLog = new ContentValues();
+        newLog.put(LOG_KEY_DATE, log.getDate());
+        newLog.put(LOG_KEY_NAME, log.getName());
+        newLog.put(LOG_KEY_ACTIVE, log.getStatus());
+        db.insert(DB_LOGS_TABLE, null, newLog);
+    }
+
 
     public void insertDevice(String name, boolean isActive) {
         ContentValues newDevice = new ContentValues();
@@ -79,6 +105,31 @@ public class DatabaseAdapter {
         newDevice.put(KEY_NAME, name);
         db.insert(DB_DEVICE_TABLE, null, newDevice);
     }
+
+    public ArrayList<Log> getAllLogs() {
+        ArrayList<Log> list = new ArrayList<Log>();
+        String[] columns = {KEY_ID, LOG_KEY_DATE, LOG_KEY_NAME, LOG_KEY_ACTIVE};
+        Cursor cursor = db.query(DB_LOGS_TABLE, columns, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Log log = new Log(cursor.getInt(ID_COLUMN), cursor.getString(LOG_DATE_COLUMN),
+                        cursor.getString(LOG_NAME_COLUMN), cursor.getString(LOG_ACTIVE_COLUMN));
+                list.add(log);
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return list;
+    }
+
+    public void clearLogsTable() {
+        db.execSQL("DELETE FROM " + DB_LOGS_TABLE);
+        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME='" + DB_LOGS_TABLE + "'");
+    }
+
+
 
     public void updateDevice(Device device) {
         int id = device.getId();
@@ -180,6 +231,23 @@ public class DatabaseAdapter {
             do {
                 PhoneNumber phoneNumber = new PhoneNumber(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
                 list.add(phoneNumber.toString());
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return list;
+    }
+
+    public ArrayList<String> getAllOnlyNumbers() {
+        ArrayList<String> list = new ArrayList<String>();
+        String[] columns = {KEY_ID, KEY_PHONE};
+        Cursor cursor = db.query(DB_PHONE_TABLE, columns, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                PhoneNumber phoneNumber = new PhoneNumber(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+                list.add(phoneNumber.getPhoneNumber());
             } while (cursor.moveToNext());
         }
         if (cursor != null && !cursor.isClosed()) {
