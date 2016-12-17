@@ -1,16 +1,19 @@
 package database;
 
-import static database.DatabaseAdapter.DB_CREATE_DEVICE_TABLE;
-import static database.DatabaseAdapter.DB_CREATE_LOGS_TABLE;
-import static database.DatabaseAdapter.DB_CREATE_PHONE_TABLE;
-import static database.DatabaseAdapter.DB_DEVICE_TABLE;
-import static database.DatabaseAdapter.DB_LOGS_TABLE;
-import static database.DatabaseAdapter.DB_PHONE_TABLE;
 import static database.DatabaseAdapter.DB_VERSION;
 import static database.DatabaseAdapter.DEBUG_TAG;
-import static database.DatabaseAdapter.DROP_DEVICE_TABLE;
-import static database.DatabaseAdapter.DROP_LOGS_TABLE;
-import static database.DatabaseAdapter.DROP_PHONE_TABLE;
+import static database.table.DeviceTable.DB_CREATE_DEVICE_TABLE;
+import static database.table.DeviceTable.DB_DEVICE_TABLE;
+import static database.table.DeviceTable.DROP_DEVICE_TABLE;
+import static database.table.LogTable.DB_CREATE_LOGS_TABLE;
+import static database.table.LogTable.DB_LOGS_TABLE;
+import static database.table.LogTable.DROP_LOGS_TABLE;
+import static database.table.PhoneTable.DB_CREATE_PHONE_TABLE;
+import static database.table.PhoneTable.DB_PHONE_TABLE;
+import static database.table.PhoneTable.DROP_PHONE_TABLE;
+import static database.table.TokenTable.DB_CREATE_TOKEN_TABLE;
+import static database.table.TokenTable.DB_TOKEN_TABLE;
+import static database.table.TokenTable.DROP_TOKEN_TABLE;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE_PHONE_TABLE);
         db.execSQL(DB_CREATE_DEVICE_TABLE);
         db.execSQL(DB_CREATE_LOGS_TABLE);
+        db.execSQL(DB_CREATE_TOKEN_TABLE);
 
 
 
@@ -37,6 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(DEBUG_TAG, "Table " + DB_PHONE_TABLE + " ver." + DB_VERSION + " created");
         Log.d(DEBUG_TAG, "Table " + DB_DEVICE_TABLE + " ver." + DB_VERSION + " created");
         Log.d(DEBUG_TAG, "Table " + DB_LOGS_TABLE + " ver." + DB_VERSION + " created");
+        Log.d(DEBUG_TAG, "Table " + DB_TOKEN_TABLE + " ver." + DB_VERSION + " created");
     }
 
     @Override
@@ -44,12 +49,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_PHONE_TABLE);
         db.execSQL(DROP_DEVICE_TABLE);
         db.execSQL(DROP_LOGS_TABLE);
+        db.execSQL(DROP_TOKEN_TABLE);
 
 
         Log.d(DEBUG_TAG, "Database updating...");
         Log.d(DEBUG_TAG, "Table " + DB_PHONE_TABLE + " updated from ver." + oldVersion + " to ver." + newVersion);
         Log.d(DEBUG_TAG, "Table " + DB_DEVICE_TABLE + " updated from ver." + oldVersion + " to ver." + newVersion);
         Log.d(DEBUG_TAG, "Table " + DB_LOGS_TABLE + " updated from ver." + oldVersion + " to ver." + newVersion);
+        Log.d(DEBUG_TAG, "Table " + DB_TOKEN_TABLE + " updated from ver." + oldVersion + " to ver." + newVersion);
         Log.d(DEBUG_TAG, "All data is lost.");
 
         onCreate(db);

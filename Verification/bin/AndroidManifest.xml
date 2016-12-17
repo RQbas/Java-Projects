@@ -32,7 +32,7 @@
             android:label="@string/title_activity_logs" >
         </activity>
         <activity
-            android:name=".AdminActivity"
+            android:name="admin.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
         <activity
