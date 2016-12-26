@@ -4,7 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-	<uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
@@ -32,12 +33,28 @@
             android:label="@string/title_activity_logs" >
         </activity>
         <activity
-            android:name="admin.AdminActivity"
+            android:name=".AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
         <activity
             android:name=".StatusActivity"
             android:label="@string/title_activity_status" >
+        </activity>
+        <activity
+            android:name="admin.PhoneTab"
+            android:label="@string/title_activity_admin_panel" >
+        </activity>
+        <activity
+            android:name="admin.DevicesTab"
+            android:label="@string/title_activity_devices_tab" >
+        </activity>
+        <activity
+            android:name="admin.TokensTab"
+            android:label="@string/title_activity_tokens_tab" >
+        </activity>
+        <activity
+            android:name="admin.LogsTab"
+            android:label="@string/title_activity_logs_tab" >
         </activity>
     </application>
 

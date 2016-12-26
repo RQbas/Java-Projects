@@ -3,7 +3,7 @@ package com.app.verification;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.AdminActivity;
+import admin.PhoneTab;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,7 +59,7 @@ public class SettingsActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             String pass = phoneTextField.getText().toString();
             if (pass.equals("+1")) {
-                Intent launchAdminPanel = new Intent(SettingsActivity.this, AdminActivity.class);
+                Intent launchAdminPanel = new Intent(SettingsActivity.this, PhoneTab.class);
                 startActivity(launchAdminPanel);
             }
             return true;

@@ -8,5 +8,9 @@
     <string name="title_activity_logs">LogsActivity</string>
     <string name="title_activity_admin">AdminActivity</string>
     <string name="title_activity_status">StatusActivity</string>
+    <string name="title_activity_admin_panel">AdminPanelActivity</string>
+    <string name="title_activity_devices_tab">DevicesTab</string>
+    <string name="title_activity_tokens_tab">TokensTab</string>
+    <string name="title_activity_logs_tab">LogsTab</string>
 
 </resources>

@@ -76,6 +76,24 @@ public class DeviceTable {
         return device;
     }
 
+    public ArrayList<String> getAllDevicesToString() {
+        ArrayList<String> list = new ArrayList<String>();
+        String[] columns = {KEY_ID, KEY_NAME, KEY_ACTIVE};
+        Cursor cursor = db.query(DB_DEVICE_TABLE, columns, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                boolean isActive = (cursor.getInt(ACTIVE_COLUMN) == 1) ? true : false;
+                Device device = new Device(cursor.getInt(ID_COLUMN), cursor.getString(NAME_COLUMN), isActive);
+                list.add(device.toString());
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return list;
+    }
+
     public ArrayList<Device> getAllDevices() {
         ArrayList<Device> list = new ArrayList<Device>();
         String[] columns = {KEY_ID, KEY_NAME, KEY_ACTIVE};

@@ -117,6 +117,10 @@ public class DatabaseAdapter {
         return dt.getAllDevices();
     }
 
+    public ArrayList<String> getAllDevicesToString() {
+        return dt.getAllDevicesToString();
+    }
+
     public void clearDeviceTable() {
         dt.clearDeviceTable();
     }

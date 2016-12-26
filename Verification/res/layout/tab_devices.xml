@@ -6,48 +6,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.app.verification.AdminActivity" >
+    tools:context="admin.DevicesTab" >
 
-  <TextView
-    	android:id="@+id/adminTextView"
+   <TextView
+    	android:id="@+id/deviceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         />
 
 	<Button
-        android:id="@+id/buttonDeleteNumber"
+        android:id="@+id/buttonDeleteDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Delete Number" />
+        android:text="Delete Device" />
 
-
-	<Button
-        android:id="@+id/buttonClearPhoneTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="Clear Phone Table" />
-        
         <Button
         android:id="@+id/buttonClearDeviceTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="Clear Device Table" />
-
-		<Button
-        android:id="@+id/buttonClearLogTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:text="Clear Log Table" />
-
+        
    <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
