@@ -9,13 +9,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import database.DatabaseAdapter;
 import database.Device;
 
@@ -23,9 +26,11 @@ import database.Device;
 public class DevicesTab extends AdminTab implements TabListener {
     final int tabID = 1;
     DatabaseAdapter db;
+    Button addButton;
     Button deleteButton;
     Button clearDeviceButton;
     TextView deviceTextView;
+    EditText deviceNameField;
     ListView listNumbers;
     List<Device> numbers;
     ArrayAdapter adapter;
@@ -38,6 +43,8 @@ public class DevicesTab extends AdminTab implements TabListener {
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
         setTextView();
+        setAddButton();
+        setDeviceNameField();
         setDeleteButton();
         setClearDeviceButton();
         setDeviceList();
@@ -69,6 +76,12 @@ public class DevicesTab extends AdminTab implements TabListener {
         deviceTextView.setText("Devices panel");
     }
 
+    public void setDeviceNameField() {
+        deviceNameField = (EditText) findViewById(R.id.deviceNameField);
+        deviceNameField.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+
     public void setClearDeviceButton() {
         clearDeviceButton = (Button) findViewById(R.id.buttonClearDeviceTable);
         clearDeviceButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +90,23 @@ public class DevicesTab extends AdminTab implements TabListener {
                 db.clearDeviceTable();
             }
         });
+    }
+
+    private void setAddButton() {
+        addButton = (Button) findViewById(R.id.buttonAddDevice);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String deviceName = deviceNameField.getText().toString();
+                try {
+                    db.insertDevice(deviceName, false);
+                    Toast.makeText(getBaseContext(), "Device added", Toast.LENGTH_LONG).show();
+                    deviceNameField.getText().clear();
+                } catch (Exception e) {
+                }
+            }
+        });
+
     }
 
     public void setDeleteButton() {
@@ -88,6 +118,7 @@ public class DevicesTab extends AdminTab implements TabListener {
                 try {
                     numberID = numberID.substring((numberID.indexOf("(") + 1), numberID.indexOf(")"));
                     db.deleteDevice(Integer.parseInt(numberID));
+                    Toast.makeText(getBaseContext(), "Device deleted", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                 }
 

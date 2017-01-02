@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import database.DatabaseAdapter;
 import database.PhoneNumber;
 
@@ -59,6 +60,8 @@ public class PhoneTab extends AdminTab implements TabListener {
 
     }
 
+
+
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());
         db.open();
@@ -75,6 +78,7 @@ public class PhoneTab extends AdminTab implements TabListener {
             @Override
             public void onClick(View view) {
                 db.clearPhoneTable();
+                Toast.makeText(getBaseContext(), "Numbers list cleaned", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -89,6 +93,7 @@ public class PhoneTab extends AdminTab implements TabListener {
                 try {
                     numberID = numberID.substring((numberID.indexOf("(") + 1), numberID.indexOf(")"));
                     db.deleteNumber(Integer.parseInt(numberID));
+                    Toast.makeText(getBaseContext(), "Number deleted", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                 }
 
@@ -108,6 +113,7 @@ public class PhoneTab extends AdminTab implements TabListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String number = ((TextView) view).getText().toString();
                 phoneTextView.setText(number);
+                Toast.makeText(getBaseContext(), "Number selected", Toast.LENGTH_LONG).show();
             }
         });
         {

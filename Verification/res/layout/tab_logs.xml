@@ -8,9 +8,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="admin.LogsTab" >
 
-    <TextView
+
+ <TextView
+   		android:id="@+id/logTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+         />
+         
+             <Button
+        android:id="@+id/buttonClearLogsTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Clear Logs Table" />
+        
+        
+       <ListView
+        android:id="@+id/logList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true" >
+ 
+    </ListView>
+
 
 </RelativeLayout>

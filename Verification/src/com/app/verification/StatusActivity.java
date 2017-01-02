@@ -73,11 +73,6 @@ public class StatusActivity extends ActionBarActivity {
 
     public void createDevices(ArrayList<Device> list) {
         list = db.getAllDevices();
-        if (list.isEmpty()) {
-            db.insertDevice("Router", false);
-            db.insertDevice("Blender", false);
-        }
-
     }
 
     static public void updateDeviceList(ArrayList<Device> overridingList) {

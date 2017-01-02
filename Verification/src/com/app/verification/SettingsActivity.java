@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import database.DatabaseAdapter;
 import database.PhoneNumber;
 
@@ -93,6 +94,8 @@ public class SettingsActivity extends ActionBarActivity {
                 String phoneNumber = phoneTextField.getText().toString();
                 numbers = new ArrayList<PhoneNumber>();
                 db.insertNumber(phoneNumber);
+                Toast.makeText(getBaseContext(), "Number added", Toast.LENGTH_LONG).show();
+
             }
         });
     }

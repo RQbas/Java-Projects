@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 @SuppressLint("NewApi")
 public class AdminTab extends ActionBarActivity implements TabListener {
@@ -31,6 +32,19 @@ public class AdminTab extends ActionBarActivity implements TabListener {
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
         updateFirstInitialization();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public boolean isFirstInitialization() {
