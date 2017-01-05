@@ -3,6 +3,7 @@ package com.app.verification;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ListView;
@@ -43,6 +44,11 @@ public class StatusActivity extends ActionBarActivity {
         updateDeviceListDB();
         updateLogList();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(StatusActivity.this, MainActivity.class));
     }
 
     private void updateLogList() {

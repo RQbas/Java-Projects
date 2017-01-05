@@ -68,7 +68,10 @@ public class SettingsActivity extends ActionBarActivity {
         return false;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+    }
 
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());

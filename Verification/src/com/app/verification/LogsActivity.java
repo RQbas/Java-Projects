@@ -3,6 +3,7 @@ package com.app.verification;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,11 @@ public class LogsActivity extends ActionBarActivity {
         setDatabase();
         setTextView();
         setLogList();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(LogsActivity.this, MainActivity.class));
     }
 
     private void setDatabase() {

@@ -8,10 +8,21 @@ public class Token {
     private boolean used;
     private String token;
 
-    public Token(int id, boolean used) {
+    public Token() {
+        generateToken();
+    }
+
+
+    public Token(int id) {
+        this.setId(id);
+        this.setUsed(false);
+        generateToken();
+    }
+
+    public Token(int id, boolean used, String token) {
         this.setId(id);
         this.setUsed(used);
-        generateToken();
+        this.setToken(token);
     }
 
     private void generateToken() {
@@ -42,6 +53,11 @@ public class Token {
 
     public void setUsed(boolean used) {
         this.used = used;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getId() + ") " + String.valueOf(isUsed()) + " " + getToken();
     }
 
 }

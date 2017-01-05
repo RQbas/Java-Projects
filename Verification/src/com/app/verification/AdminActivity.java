@@ -44,6 +44,7 @@ public class AdminActivity extends ActionBarActivity {
     }
 
 
+
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());
         db.open();

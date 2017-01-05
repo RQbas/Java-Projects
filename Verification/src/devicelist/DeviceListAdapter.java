@@ -3,9 +3,11 @@ package devicelist;
 import java.util.ArrayList;
 
 import com.app.verification.R;
+import com.app.verification.SettingsActivity;
 import com.app.verification.StatusActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,22 +16,27 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import database.Device;
 import database.Log;
 import manager.ManagerSMS;
 
 public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Device> list = new ArrayList<Device>();
+    private ArrayList<String> phoneList = new ArrayList<String>();
     private Context context;
     ManagerSMS managerSMS;
     TextView deviceName;
     Button statusButton;
+    boolean isNumberProvided;
 
 
     public DeviceListAdapter(ArrayList<Device> list, Context context, ArrayList<String> phoneList) {
         this.list = list;
+        this.phoneList = phoneList;
         this.context = context;
         managerSMS = new ManagerSMS(phoneList);
+
     }
 
 
@@ -74,24 +81,28 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         statusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int position = (Integer) v.getTag();
+                try {
+                    list.get(position).changeStatus();
+                    Log log = new Log(list.get(position).getName(), list.get(position).isOn());
 
-                list.get(position).changeStatus();
-                Log log = new Log(list.get(position).getName(), list.get(position).isOn());
-
-                StatusActivity.updateDeviceList(list);
-                StatusActivity.addLog(log);
-
-                managerSMS.setMSG(log.toStringSMS());
-                managerSMS.sendSMS();
-
-                setButtonColor(list.get(position).isOn());
-                statusButton.setText(list.get(position).displayForButton());
+                    StatusActivity.updateDeviceList(list);
+                    StatusActivity.addLog(log);
 
 
-                notifyDataSetChanged();
+                    managerSMS.setMSG(log.toStringSMS());
+                    managerSMS.sendSMS();
+
+                    setButtonColor(list.get(position).isOn());
+                    statusButton.setText(list.get(position).displayForButton());
+
+                    notifyDataSetChanged();
+                } catch (Exception e) {
+                    assertNumberProvided();
+                }
             }
+
+
         });
         return view;
     }
@@ -108,6 +119,14 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         else
             statusButton.setBackgroundColor(Color.rgb(0, 255, 0));
 
+    }
+
+    private void assertNumberProvided() {
+        if (phoneList.isEmpty()) {
+            Toast.makeText(context, "Provide phone number", Toast.LENGTH_LONG).show();
+            Intent intentSettings = new Intent(context, SettingsActivity.class);
+            context.startActivity(intentSettings);
+        }
     }
 }
 

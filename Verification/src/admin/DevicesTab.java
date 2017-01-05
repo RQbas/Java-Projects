@@ -51,9 +51,7 @@ public class DevicesTab extends AdminTab implements TabListener {
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-
-    }
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {}
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {

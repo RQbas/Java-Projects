@@ -35,6 +35,7 @@ public class DatabaseAdapter {
             dt = new DeviceTable(db);
             pt = new PhoneTable(db);
             lt = new LogTable(db);
+            tt = new TokenTable(db);
         } catch (SQLException e) {
             db = dbHelper.getReadableDatabase();
         }
@@ -124,5 +125,27 @@ public class DatabaseAdapter {
     public void clearDeviceTable() {
         dt.clearDeviceTable();
     }
+
+    public void insertToken(Token token) {
+        tt.insertToken(token);
+    }
+
+    public boolean deleteToken(int id) {
+        return tt.deleteToken(id);
+    }
+
+    public Token getToken(int id) {
+        return tt.getToken(id);
+    }
+
+    public ArrayList<Token> getAllTokens() {
+        return tt.getAllTokens();
+    }
+
+    public ArrayList<String> getAllTokensToString() {
+        return tt.getAllTokensToString();
+    }
+
+
 
 }
