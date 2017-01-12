@@ -100,6 +100,20 @@ public class PhoneTable {
         return list;
     }
 
+    public boolean IsPhoneTableEmpty() {
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DB_PHONE_TABLE, null);
+        boolean isEmpty = false;
+        if (cursor != null) {
+            cursor.moveToFirst();
+            if (cursor.getInt(0) == 0) {
+                isEmpty = true;
+            }
+
+        }
+        return isEmpty;
+    }
+
+
     public void clearPhoneTable() {
         db.execSQL("DELETE FROM " + DB_PHONE_TABLE);
         db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME='" + DB_PHONE_TABLE + "'");

@@ -2,6 +2,7 @@ package admin;
 
 import com.app.verification.R;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -22,10 +23,13 @@ public class TokensTab extends AdminTab implements TabListener {
     final int tabID = 2;
     ActionBar adminBar;
     TextView tokenTextView;
-    Button addButton;
+    Button changeTokenStatusButton;
+    Button generateNewSet;
     ListView listTokens;
     ArrayAdapter adapter;
     DatabaseAdapter db;
+    Runnable run;
+    int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,10 @@ public class TokensTab extends AdminTab implements TabListener {
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
         setTextView();
-        setAddButton();
+        setChangeTokenStatusButton();
+        setGenerateNewSetButton();
         setTokenList();
+        setTokenListUpdater();
     }
 
     @Override
@@ -56,6 +62,24 @@ public class TokensTab extends AdminTab implements TabListener {
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());
         db.open();
+
+    }
+
+    void setTokenListUpdater() {
+        run = new Runnable() {
+            @SuppressLint("NewApi")
+            public void run() {
+                adapter.clear();
+                adapter.addAll(db.getAllTokensToString());
+                adapter.notifyDataSetChanged();
+                listTokens.invalidateViews();
+                listTokens.refreshDrawableState();
+            }
+        };
+    }
+
+    private void updateDeviceList() {
+        runOnUiThread(run);
     }
 
     public void setTextView() {
@@ -64,14 +88,15 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
 
-    private void setAddButton() {
-        addButton = (Button) findViewById(R.id.buttonAddToken);
-        addButton.setOnClickListener(new View.OnClickListener() {
+    private void setChangeTokenStatusButton() {
+        changeTokenStatusButton = (Button) findViewById(R.id.buttonChangeToken);
+        changeTokenStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    //
-                    Toast.makeText(getBaseContext(), "Token added", Toast.LENGTH_LONG).show();
+                    db.updateToken(Integer.valueOf(getItemIndex()));
+                    updateDeviceList();
+                    Toast.makeText(getBaseContext(), "Token status changed", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                 }
             }
@@ -79,18 +104,39 @@ public class TokensTab extends AdminTab implements TabListener {
 
     }
 
+    private int getItemIndex() {
+        String tokenIndex = adapter.getItem(selectedItemIndex).toString();
+        tokenIndex = tokenIndex.substring((tokenIndex.indexOf("(") + 1), tokenIndex.indexOf(")"));
+        return Integer.parseInt(tokenIndex);
+    }
+
+    private void setGenerateNewSetButton() {
+        changeTokenStatusButton = (Button) findViewById(R.id.buttonGenerateNewSet);
+        changeTokenStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    db.clearTokenTable();
+                    db.assertTokenTableNotEmpty();
+                    updateDeviceList();
+                    Toast.makeText(getBaseContext(), "New token set generated", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
     public void setTokenList() {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllTokensToString());
         listTokens = (ListView) findViewById(R.id.listView);
         listTokens.setAdapter(adapter);
-
+        listTokens.setSelector(android.R.color.darker_gray);
 
         listTokens.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String device = ((TextView) view).getText().toString();
-                tokenTextView.setText(device);
+                selectedItemIndex = position;
             }
         });
         {

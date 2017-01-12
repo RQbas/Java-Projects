@@ -36,11 +36,15 @@ public class DatabaseAdapter {
             pt = new PhoneTable(db);
             lt = new LogTable(db);
             tt = new TokenTable(db);
+
+            assertTokenTableNotEmpty();
+
         } catch (SQLException e) {
             db = dbHelper.getReadableDatabase();
         }
         return this;
     }
+
 
     public void close() {
         dbHelper.close();
@@ -49,6 +53,13 @@ public class DatabaseAdapter {
     public String getName() {
         return DB_NAME;
     }
+
+    public void assertTokenTableNotEmpty() {
+        if (isTokenTableEmpty()) {
+            tt.generateTokenRecords(50);
+        }
+    }
+
 
     public void insertLog(Log log) {
         lt.insertLog(log);
@@ -88,6 +99,10 @@ public class DatabaseAdapter {
 
     public ArrayList<String> getAllOnlyNumbers() {
         return pt.getAllOnlyNumbers();
+    }
+
+    public boolean isPhoneTableEmpty() {
+        return pt.IsPhoneTableEmpty();
     }
 
     public void clearPhoneTable() {
@@ -144,6 +159,18 @@ public class DatabaseAdapter {
 
     public ArrayList<String> getAllTokensToString() {
         return tt.getAllTokensToString();
+    }
+
+    public void updateToken(int id) {
+        tt.updateToken(id);
+    }
+
+    public boolean isTokenTableEmpty() {
+        return tt.isTokenTableEmpty();
+    }
+
+    public void clearTokenTable() {
+        tt.clearTokenTable();
     }
 
 

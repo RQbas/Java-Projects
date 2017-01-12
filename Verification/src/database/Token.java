@@ -57,7 +57,8 @@ public class Token {
 
     @Override
     public String toString() {
-        return "(" + getId() + ") " + String.valueOf(isUsed()) + " " + getToken();
+        String usage = isUsed() ? "Used" : "Not used";
+        return "(" + getId() + ") " + usage + " " + getToken();
     }
 
 }

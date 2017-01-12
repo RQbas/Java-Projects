@@ -16,12 +16,21 @@
         />
         
         <Button
-        android:id="@+id/buttonAddToken"
+        android:id="@+id/buttonChangeToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Add Token" />
+        android:text="Change Token status" />
+        
+          <Button
+        android:id="@+id/buttonGenerateNewSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Generate New Set" />
+        
         
          <ListView
         android:id="@+id/listView"

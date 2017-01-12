@@ -33,6 +33,8 @@ public class PhoneTab extends AdminTab implements TabListener {
     List<PhoneNumber> numbers;
     ArrayAdapter adapter;
     ActionBar adminBar;
+    Runnable runUpdater;
+    int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class PhoneTab extends AdminTab implements TabListener {
         setDeleteButton();
         setClearPhoneButton();
         setNumberList();
+        setPhoneListUpdater();
     }
 
     @Override
@@ -60,11 +63,26 @@ public class PhoneTab extends AdminTab implements TabListener {
 
     }
 
-
-
     private void setDatabase() {
         db = new DatabaseAdapter(getApplicationContext());
         db.open();
+    }
+
+    void setPhoneListUpdater() {
+        runUpdater = new Runnable() {
+            @SuppressLint("NewApi")
+            public void run() {
+                adapter.clear();
+                adapter.addAll(db.getAllNumbers());
+                adapter.notifyDataSetChanged();
+                listNumbers.invalidateViews();
+                listNumbers.refreshDrawableState();
+            }
+        };
+    }
+
+    private void updateDeviceList() {
+        runOnUiThread(runUpdater);
     }
 
     public void setTextView() {
@@ -78,6 +96,7 @@ public class PhoneTab extends AdminTab implements TabListener {
             @Override
             public void onClick(View view) {
                 db.clearPhoneTable();
+                updateDeviceList();
                 Toast.makeText(getBaseContext(), "Numbers list cleaned", Toast.LENGTH_LONG).show();
             }
         });
@@ -89,16 +108,20 @@ public class PhoneTab extends AdminTab implements TabListener {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String numberID = phoneTextView.getText().toString();
                 try {
-                    numberID = numberID.substring((numberID.indexOf("(") + 1), numberID.indexOf(")"));
-                    db.deleteNumber(Integer.parseInt(numberID));
+                    db.deleteNumber(getItemIndex());
+                    updateDeviceList();
                     Toast.makeText(getBaseContext(), "Number deleted", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                 }
-
             }
         });
+    }
+
+    private int getItemIndex() {
+        String numberIndex = adapter.getItem(selectedItemIndex).toString();
+        numberIndex = numberIndex.substring((numberIndex.indexOf("(") + 1), numberIndex.indexOf(")"));
+        return Integer.parseInt(numberIndex);
     }
 
 
@@ -106,14 +129,12 @@ public class PhoneTab extends AdminTab implements TabListener {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllNumbers());
         listNumbers = (ListView) findViewById(R.id.listView);
         listNumbers.setAdapter(adapter);
-
+        listNumbers.setSelector(android.R.color.darker_gray);
 
         listNumbers.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String number = ((TextView) view).getText().toString();
-                phoneTextView.setText(number);
-                Toast.makeText(getBaseContext(), "Number selected", Toast.LENGTH_LONG).show();
+                selectedItemIndex = position;
             }
         });
         {

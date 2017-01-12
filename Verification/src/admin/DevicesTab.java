@@ -1,9 +1,8 @@
 package admin;
 
-import java.util.List;
-
 import com.app.verification.R;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -20,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import database.DatabaseAdapter;
-import database.Device;
 
 
 public class DevicesTab extends AdminTab implements TabListener {
@@ -31,10 +29,11 @@ public class DevicesTab extends AdminTab implements TabListener {
     Button clearDeviceButton;
     TextView deviceTextView;
     EditText deviceNameField;
-    ListView listNumbers;
-    List<Device> numbers;
-    ArrayAdapter adapter;
+    ListView listDevices;;
+    ArrayAdapter<String> adapter;
     ActionBar adminBar;
+    Runnable run;
+    int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +42,13 @@ public class DevicesTab extends AdminTab implements TabListener {
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
         setTextView();
+        setDeviceList();
         setAddButton();
         setDeviceNameField();
         setDeleteButton();
         setClearDeviceButton();
-        setDeviceList();
+        setDeviceListUpdater();
+
     }
 
     @Override
@@ -69,6 +70,25 @@ public class DevicesTab extends AdminTab implements TabListener {
         db.open();
     }
 
+    void setDeviceListUpdater() {
+        run = new Runnable() {
+            @SuppressLint("NewApi")
+            public void run() {
+                adapter.clear();
+                adapter.addAll(db.getAllDevicesToString());
+                adapter.notifyDataSetChanged();
+                listDevices.invalidateViews();
+                listDevices.refreshDrawableState();
+            }
+        };
+    }
+
+
+
+    private void updateDeviceList() {
+        runOnUiThread(run);
+    }
+
     public void setTextView() {
         deviceTextView = (TextView) findViewById(R.id.deviceTextView);
         deviceTextView.setText("Devices panel");
@@ -86,9 +106,13 @@ public class DevicesTab extends AdminTab implements TabListener {
             @Override
             public void onClick(View view) {
                 db.clearDeviceTable();
+                updateDeviceList();
+                Toast.makeText(getBaseContext(), "Device list cleaned", Toast.LENGTH_LONG).show();
             }
         });
     }
+
+
 
     private void setAddButton() {
         addButton = (Button) findViewById(R.id.buttonAddDevice);
@@ -100,6 +124,7 @@ public class DevicesTab extends AdminTab implements TabListener {
                     db.insertDevice(deviceName, false);
                     Toast.makeText(getBaseContext(), "Device added", Toast.LENGTH_LONG).show();
                     deviceNameField.getText().clear();
+                    updateDeviceList();
                 } catch (Exception e) {
                 }
             }
@@ -112,11 +137,10 @@ public class DevicesTab extends AdminTab implements TabListener {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String numberID = deviceTextView.getText().toString();
                 try {
-                    numberID = numberID.substring((numberID.indexOf("(") + 1), numberID.indexOf(")"));
-                    db.deleteDevice(Integer.parseInt(numberID));
+                    db.deleteDevice(getItemIndex());
                     Toast.makeText(getBaseContext(), "Device deleted", Toast.LENGTH_LONG).show();
+                    updateDeviceList();
                 } catch (Exception e) {
                 }
 
@@ -124,22 +148,24 @@ public class DevicesTab extends AdminTab implements TabListener {
         });
     }
 
+    private int getItemIndex() {
+        String deviceIndex = adapter.getItem(selectedItemIndex).toString();
+        deviceIndex = deviceIndex.substring((deviceIndex.indexOf("(") + 1), deviceIndex.indexOf(")"));
+        return Integer.parseInt(deviceIndex);
+    }
+
     public void setDeviceList() {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllDevicesToString());
-        listNumbers = (ListView) findViewById(R.id.listView);
-        listNumbers.setAdapter(adapter);
+        listDevices = (ListView) findViewById(R.id.listView);
+        listDevices.setAdapter(adapter);
+        listDevices.setSelector(android.R.color.darker_gray);
 
-
-        listNumbers.setOnItemClickListener(new OnItemClickListener() {
+        listDevices.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String device = ((TextView) view).getText().toString();
-                deviceTextView.setText(device);
+                selectedItemIndex = position;
             }
         });
-        {
-        }
-
     }
 }

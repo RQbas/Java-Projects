@@ -95,6 +95,37 @@ public class TokenTable {
         return list;
     }
 
+    public void updateToken(int id) {
+        Token token = getToken(id);
+        int isUsedAsInt = token.isUsed() ? 0 : 1;
+        String where = KEY_ID + "=" + id;
+        ContentValues updateValues = new ContentValues();
+        updateValues.put(KEY_USED, isUsedAsInt);
+        db.update(DB_TOKEN_TABLE, updateValues, where, null);
+    }
 
+    public boolean isTokenTableEmpty() {
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DB_TOKEN_TABLE, null);
+        boolean isEmpty = false;
+        if (cursor != null) {
+            cursor.moveToFirst();
+            if (cursor.getInt(0) == 0) {
+                isEmpty = true;
+            }
+
+        }
+        return isEmpty;
+    }
+
+    public void generateTokenRecords(int amount) {
+        for (int i = 1; i <= amount; i++)
+            insertToken(new Token(i));
+    }
+
+    public void clearTokenTable() {
+        db.execSQL("DELETE FROM " + DB_TOKEN_TABLE);
+        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME='" + DB_TOKEN_TABLE + "'");
+    }
 
 }
+
