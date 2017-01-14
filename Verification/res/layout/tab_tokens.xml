@@ -17,15 +17,15 @@
         
         <Button
         android:id="@+id/buttonChangeToken"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Change Token status" />
+        android:text="Change Token Use" />
         
           <Button
         android:id="@+id/buttonGenerateNewSet"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"

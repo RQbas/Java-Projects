@@ -55,6 +55,10 @@ public class Token {
         this.used = used;
     }
 
+    public String toStringSMS() {
+        return "[" + getId() + "] " + "[" + getToken() + "] ";
+    }
+
     @Override
     public String toString() {
         String usage = isUsed() ? "Used" : "Not used";

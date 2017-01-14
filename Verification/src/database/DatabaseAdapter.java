@@ -153,6 +153,10 @@ public class DatabaseAdapter {
         return tt.getToken(id);
     }
 
+    public Token getTokenToSMS() {
+        return tt.getTokenToSMS();
+    }
+
     public ArrayList<Token> getAllTokens() {
         return tt.getAllTokens();
     }

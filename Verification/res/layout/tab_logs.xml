@@ -19,11 +19,20 @@
          
              <Button
         android:id="@+id/buttonClearLogsTable"
-        android:layout_width="wrap_content"
+       android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="Clear Logs Table" />
+        
+        
+                   <Button
+        android:id="@+id/buttonSendLogSMS"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Send log as SMS" />
         
         
        <ListView
@@ -31,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true" >
  
     </ListView>

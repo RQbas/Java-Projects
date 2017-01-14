@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import database.DatabaseAdapter;
 import database.Log;
-
+import manager.ManagerSMS;
 
 public class LogsTab extends AdminTab implements TabListener {
     final int tabID = 3;
@@ -32,8 +32,10 @@ public class LogsTab extends AdminTab implements TabListener {
     List<Log> list;
     Button clearLogsButton;
     Button deleteLogButton;
+    Button sendLogSMSButton;
     Runnable runUpdater;
-    int selectedItemIndex = 0;
+    ManagerSMS managerSMS;
+    int selectedItemIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,10 @@ public class LogsTab extends AdminTab implements TabListener {
         setDatabase();
         setTextView();
         setClearLogsButton();
+        setSendLogSMSButton();
         setLogList();
         setLogListUpdater();
+        managerSMS = new ManagerSMS(db);
     }
 
     @Override
@@ -95,9 +99,29 @@ public class LogsTab extends AdminTab implements TabListener {
             public void onClick(View view) {
                 db.clearLogsTable();
                 updateLogList();
+                selectedItemIndex = -1;
                 Toast.makeText(getBaseContext(), "Log list cleaned", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void setSendLogSMSButton() {
+        clearLogsButton = (Button) findViewById(R.id.buttonSendLogSMS);
+        clearLogsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isAnyItemSelected()) {
+                    managerSMS.setMSG(adapter.getItem(selectedItemIndex).toString());
+                    managerSMS.sendSMS();
+                } else {
+                    Toast.makeText(getBaseContext(), "Log not selected", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private boolean isAnyItemSelected() {
+        return selectedItemIndex == -1 ? false : true;
     }
 
     public void setLogList() {
@@ -112,7 +136,5 @@ public class LogsTab extends AdminTab implements TabListener {
                 selectedItemIndex = position;
             }
         });
-
-
     }
 }

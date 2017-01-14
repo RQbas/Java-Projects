@@ -59,6 +59,22 @@ public class TokenTable {
         return token;
     }
 
+    public Token getTokenToSMS() {
+        String[] columns = {KEY_ID, KEY_USED, KEY_TOKEN};
+        String where = KEY_USED + "=" + 0;
+        Cursor cursor = db.query(DB_TOKEN_TABLE, columns, where, null, null, null, null, "1");
+        Token token = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            String tokenCode = cursor.getString(TOKEN_COLUMN);
+            int id = cursor.getInt(ID_COLUMN);
+            boolean isUsed = (cursor.getInt(USED_COLUMN) == 1) ? true : false;
+            token = new Token(id, isUsed, tokenCode);
+            token.setUsed(!isUsed);
+            updateToken(token.getId());
+        }
+        return token;
+    }
+
     public ArrayList<Token> getAllTokens() {
         ArrayList<Token> list = new ArrayList<Token>();
         String[] columns = {KEY_ID, KEY_USED, KEY_TOKEN};
@@ -104,6 +120,7 @@ public class TokenTable {
         db.update(DB_TOKEN_TABLE, updateValues, where, null);
     }
 
+
     public boolean isTokenTableEmpty() {
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DB_TOKEN_TABLE, null);
         boolean isEmpty = false;
@@ -125,6 +142,10 @@ public class TokenTable {
     public void clearTokenTable() {
         db.execSQL("DELETE FROM " + DB_TOKEN_TABLE);
         db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME='" + DB_TOKEN_TABLE + "'");
+    }
+
+    public void getToken() {
+
     }
 
 }

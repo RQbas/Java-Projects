@@ -1,18 +1,23 @@
 package manager;
 
-import java.util.ArrayList;
-
 import android.telephony.SmsManager;
+import database.DatabaseAdapter;
+import database.Log;
+import database.Token;
 
 public class ManagerSMS {
     public SmsManager smsManager;
-    public ArrayList<String> phoneList = new ArrayList<String>();
     public String msg;
+    DatabaseAdapter db;
 
-    public ManagerSMS(ArrayList<String> phoneList) {
-        this.phoneList = phoneList;
+    public ManagerSMS(DatabaseAdapter db) {
+        this.db = db;
         smsManager = SmsManager.getDefault();
 
+    }
+
+    public void setMSG(Log log, Token token) {
+        msg = token.toStringSMS() + " " + log.toStringSMS();
     }
 
     public void setMSG(String msg) {
@@ -20,6 +25,6 @@ public class ManagerSMS {
     }
 
     public void sendSMS() {
-        smsManager.sendTextMessage(phoneList.get(0), null, msg, null, null);
+        smsManager.sendTextMessage(db.getAllOnlyNumbers().get(0), null, msg, null, null);
     }
 }
