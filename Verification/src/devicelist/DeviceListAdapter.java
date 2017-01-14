@@ -86,7 +86,8 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
 
                 int index = (Integer) v.getTag();
-                try {
+
+                if (isNumberProvided()) {
                     getSelectedDevice(index);
                     changeSelectedDeviceStatus();
                     updateSelectedDevice();
@@ -94,8 +95,8 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
                     manageSendingSMS();
                     changeButtonDisplay();
                     notifyDataSetChanged();
-                } catch (Exception e) {
-                    assertNumberProvided();
+                } else {
+                    handleNumberNotProvided();
                 }
             }
 
@@ -144,12 +145,15 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
 
     }
 
-    private void assertNumberProvided() {
-        if (db.isPhoneTableEmpty()) {
-            Toast.makeText(context, "Provide phone number", Toast.LENGTH_LONG).show();
-            Intent intentSettings = new Intent(context, SettingsActivity.class);
-            context.startActivity(intentSettings);
-        }
+    private boolean isNumberProvided() {
+        return db.isPhoneTableEmpty() ? false : true;
+
+    }
+
+    private void handleNumberNotProvided() {
+        Toast.makeText(context, "Provide phone number", Toast.LENGTH_LONG).show();
+        Intent intentSettings = new Intent(context, SettingsActivity.class);
+        context.startActivity(intentSettings);
     }
 }
 

@@ -10,7 +10,7 @@
         
         <Button
         android:id="@+id/buttonStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
@@ -18,7 +18,7 @@
         
         <Button
         android:id="@+id/buttonLogs"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
@@ -26,11 +26,18 @@
         
         <Button
         android:id="@+id/buttonSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
         android:text="Settings" />
         
+        <Button
+        android:id="@+id/buttonExit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true"
+        android:text="Exit" />
 
 </RelativeLayout>

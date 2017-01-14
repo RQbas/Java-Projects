@@ -1,5 +1,6 @@
 package com.app.verification;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
         setSettingButton();
         setStatusButton();
         setLogButton();
+        setExitButton();
     }
 
     public void setStatusButton() {
@@ -57,6 +59,17 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intentLogs = new Intent(MainActivity.this, LogsActivity.class);
                 startActivity(intentLogs);
+            }
+        });
+    }
+
+    public void setExitButton() {
+        buttonLogs = (Button) findViewById(R.id.buttonExit);
+        buttonLogs.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
             }
         });
     }
