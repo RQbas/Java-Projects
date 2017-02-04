@@ -72,7 +72,7 @@ public class MainWindow {
 			MainPanel.add(FormattingToolbar);
 			
 		}
-		void AddWorkArea(JPanel WorkArea, Dimension ScreenSize) {
+		void AddWorkArea(JScrollPane WorkArea, Dimension ScreenSize) {
 			WorkArea.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.85*ScreenSize.height)));
 			MainPanel.add(WorkArea);
 		}

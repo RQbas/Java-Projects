@@ -52,10 +52,10 @@ public class FormulaMode {
 		
 }
 	public static void setFullFormula(int row, int col){
+		trySetFormulaMode(WorkArea.CellContent);
 		FormulaMode.FullFormula=(String) WorkArea.WorkTable.getModel().getValueAt(row, col);
 		FullFormula=FullFormula.substring(1);
 		parseFullFormula(row, col);
-		
 	}
 	public static void parseFullFormula(int row, int col){
 		FormulaParts=parseValues();
@@ -234,8 +234,9 @@ public class FormulaMode {
 						FirstDiffIndex =list.indexOf("-");
 						
 				}while(FirstAddIndex!=-1 || FirstDiffIndex!=-1);			
-		
 				WorkArea.WorkTable.getModel().setValueAt(list.get(0), row, col);
+				FormulaMode.trySetFormulaMode(list.get(0));
+				FormulaBar.InputLine.setText(list.get(0));
 		}
 			
 				public static void multiplication(List<String> list, int index){

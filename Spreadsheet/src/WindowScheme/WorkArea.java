@@ -32,12 +32,14 @@ public static int ActualRow;
 public static int ActualCol;
 public static String CellContent;
 
-	static JPanel createWorkArea(Dimension ScreenSize){
+	static JScrollPane createWorkArea(Dimension ScreenSize){
 		panel= new JPanel();
+		
 		panel.setBackground(new Color(216,216,216));
 		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
 		panel.add(createScrollPane(ScreenSize));
-		return panel;
+		JScrollPane jsp = new JScrollPane(panel);
+		return jsp;
 	}
 	static JScrollPane createScrollPane(Dimension Size){
 		createTable();
