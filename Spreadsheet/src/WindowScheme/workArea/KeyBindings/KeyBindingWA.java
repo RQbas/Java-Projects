@@ -1,14 +1,12 @@
-package eventWorkArea.KeyBindings;
+package WindowScheme.workArea.KeyBindings;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
-import eventWorkArea.DocumentListenerWA;
-import eventWorkArea.FormulaMode;
-import eventWorkArea.MouseListenerWA;
+import WindowScheme.formulaBar.FormulaBar;
+import WindowScheme.workArea.WorkArea;
+
 
 public class KeyBindingWA extends AbstractAction {
 	int row;

@@ -1,4 +1,4 @@
-package WindowScheme;
+package WindowScheme.formulaBar;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,14 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
-import eventFormulaBar.*;
+import WindowScheme.execution.MainWindow;
+import WindowScheme.formulaBar.eventFormulaBar.*;
 
 public class FormulaBar {
 static JPanel panel;
 static public JTextField Coordinates;
 static public JTextField InputLine;
 
-	static JPanel createFormulaBar(Dimension ScreenSize){
+	public static JPanel createFormulaBar(Dimension ScreenSize){
 		panel= new JPanel();
 		panel.setBackground(new Color(216,216,216));
 		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));

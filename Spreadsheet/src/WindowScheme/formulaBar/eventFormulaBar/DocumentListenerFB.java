@@ -1,12 +1,12 @@
-package eventFormulaBar;
+package WindowScheme.formulaBar.eventFormulaBar;
 
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
-import eventWorkArea.FormulaMode;
+import WindowScheme.formulaBar.FormulaBar;
+import WindowScheme.workArea.WorkArea;
+import WindowScheme.workArea.eventWorkArea.FormulaMode;
 
 public class DocumentListenerFB  implements DocumentListener{
 	 private JTextField textField;

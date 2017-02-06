@@ -1,4 +1,4 @@
-package eventWorkArea;
+package WindowScheme.workArea.eventWorkArea;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
+import WindowScheme.formulaBar.FormulaBar;
+import WindowScheme.workArea.WorkArea;
+
+
 
 public class FormulaMode {
 	 public static boolean FormulaModeOn;
@@ -236,7 +238,6 @@ public class FormulaMode {
 				}while(FirstAddIndex!=-1 || FirstDiffIndex!=-1);			
 				WorkArea.WorkTable.getModel().setValueAt(list.get(0), row, col);
 				FormulaMode.trySetFormulaMode(list.get(0));
-				FormulaBar.InputLine.setText(list.get(0));
 		}
 			
 				public static void multiplication(List<String> list, int index){

@@ -1,11 +1,13 @@
-package eventFormulaBar;
+package WindowScheme.formulaBar.eventFormulaBar;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
 
-import WindowScheme.FormulaBar;
+import WindowScheme.formulaBar.FormulaBar;
+
+
 
 public class MouseListenerFB implements MouseListener{
 	@Override

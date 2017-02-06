@@ -1,8 +1,20 @@
-package WindowScheme;
-import javax.swing.*;
+package WindowScheme.execution;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import java.awt.*;
+import WindowScheme.formattingToolbar.FormattingToolbar;
+import WindowScheme.formulaBar.FormulaBar;
+import WindowScheme.menuBar.MenuBar;
+import WindowScheme.workArea.WorkArea;
 
 public class MainWindow {
 	
@@ -16,7 +28,7 @@ public class MainWindow {
 			
 			AddMenuBar(MenuBar.createMenuBar(), GetScreenSize());
 			
-			AddStandardToolbar(StandardToolbar.createStandardToolbar(),  GetScreenSize());
+			AddStandardToolbar(WindowScheme.standardToolbar.StandardToolbar.createStandardToolbar(),  GetScreenSize());
 			
 			AddFormattingToolbar(FormattingToolbar.createFormattingToolbar(),  GetScreenSize());
 			
@@ -72,14 +84,14 @@ public class MainWindow {
 			MainPanel.add(FormattingToolbar);
 			
 		}
-		void AddWorkArea(JScrollPane WorkArea, Dimension ScreenSize) {
+		void AddWorkArea(JLayeredPane WorkArea, Dimension ScreenSize) {
 			WorkArea.setMaximumSize(new Dimension((int) ScreenSize.width, (int) (0.85*ScreenSize.height)));
 			MainPanel.add(WorkArea);
 		}
 		
 		
 		
-		static void SetRigidArea(JPanel Panel, Dimension Size, double x, double y){
+		public static void SetRigidArea(JPanel Panel, Dimension Size, double x, double y){
 			Panel.add(Box.createRigidArea(new Dimension((int) (x*Size.width), (int) (y*Size.height))));
 		}
 		

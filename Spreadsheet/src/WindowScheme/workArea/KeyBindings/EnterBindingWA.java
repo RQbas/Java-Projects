@@ -1,4 +1,4 @@
-package eventWorkArea.KeyBindings;
+package WindowScheme.workArea.KeyBindings;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -7,9 +7,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
-import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
-import eventWorkArea.FormulaMode;
+import WindowScheme.workArea.WorkArea;
+import WindowScheme.workArea.eventWorkArea.FormulaMode;
+
+
 
 public class EnterBindingWA extends KeyBindingWA {
 		@Override

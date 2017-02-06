@@ -1,11 +1,11 @@
-package eventFormulaBar;
+package WindowScheme.formulaBar.eventFormulaBar;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import WindowScheme.FormulaBar;
-import WindowScheme.WorkArea;
+import WindowScheme.formulaBar.FormulaBar;
+import WindowScheme.workArea.WorkArea;
 
 public class ActionListenerFB implements ActionListener{
 	static int row;

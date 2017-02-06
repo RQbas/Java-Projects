@@ -1,4 +1,4 @@
-package WindowScheme;
+package WindowScheme.workArea;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,10 +15,11 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
-import eventWorkArea.*;
-import eventWorkArea.KeyBindings.*;
+import WindowScheme.workArea.eventWorkArea.*;
+import WindowScheme.workArea.KeyBindings.*;
 
 public class WorkArea {
+public static JLayeredPane workAreaLayers;
 static JPanel panel;
 static public JTable WorkTable;
 static public DefaultCellEditor JTableEditor;
@@ -25,26 +27,38 @@ static Object[][] rowData;
 static public Object[] columnNames;
 static final int RowNumber=151;
 static final int ColumnNumber=27;
-
-
+public static int graphsCount = 0;
 
 public static int ActualRow;
 public static int ActualCol;
+
+public static int ReleasedRow;
+public static int ReleasedCol;
+
 public static String CellContent;
 
-	static JScrollPane createWorkArea(Dimension ScreenSize){
+	public static JLayeredPane createWorkArea(Dimension ScreenSize){
 		panel= new JPanel();
+		workAreaLayers = new JLayeredPane();
+		workAreaLayers.setLayout(null);	
+		workAreaLayers.setPreferredSize((new Dimension((int) ScreenSize.width, (int) (0.85*ScreenSize.height))));
 		
 		panel.setBackground(new Color(216,216,216));
 		panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.GRAY, Color.DARK_GRAY));
 		panel.add(createScrollPane(ScreenSize));
-		JScrollPane jsp = new JScrollPane(panel);
-		return jsp;
+		panel.setBounds(0, 0,(int) ScreenSize.width, (int) ScreenSize.height);
+	
+		workAreaLayers.add(panel, new Integer(0), 0);
+		
+		
+		
+		return workAreaLayers;
 	}
+	
 	static JScrollPane createScrollPane(Dimension Size){
 		createTable();
 		 JScrollPane scrollPane= new JScrollPane(createTable());
-		 scrollPane.setPreferredSize(new Dimension((int) (0.98*Size.width), (int) (0.82*Size.height)));
+		 scrollPane.setPreferredSize(new Dimension((int) (0.98*Size.width), (int) (0.83*Size.height)));
 		 scrollPane.getViewport().setBackground(new Color(255, 255, 255));
 		return scrollPane;
 	}

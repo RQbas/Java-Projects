@@ -1,4 +1,4 @@
-package eventWorkArea.KeyBindings;
+package WindowScheme.workArea.KeyBindings;
 
 import java.awt.event.ActionEvent;
 
