@@ -38,10 +38,12 @@ public class GraphButton extends JButton{
 		};
 	}
 	 void createGraph(){
+		try{
 		WorkArea.graphsCount++;
-		WorkArea.workAreaLayers.add(new Graph(getGraphPoints()), new Integer(WorkArea.graphsCount), 0);
+		WorkArea.workAreaLayers.add(new Graph(getGraphPoints(), new Color(46, 133, 204), new Color(255, 0, 0)), new Integer(WorkArea.graphsCount), 0);	
 		WorkArea.workAreaLayers.repaint();
-	}
+		}catch(Exception e){};
+		}
 	 
 	 
 	 private ArrayList<GraphPoint> getGraphPoints() {
