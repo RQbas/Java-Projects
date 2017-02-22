@@ -13,8 +13,6 @@ import java.util.Collections;
 
 import javax.swing.JPanel;
 
-import WindowScheme.workArea.WorkArea;
-
 public class Graph extends JPanel {
     private int width = 425;
     private int height = 375;
@@ -23,6 +21,8 @@ public class Graph extends JPanel {
     private int xLabelPadding = 25;
     private int yLabelPadding = 25;
     private final int pointWidth = 4;
+    private int positionX = 0;
+    private int positionY = 0;
 
     private Color lineColor;
     private Color pointColor;
@@ -31,14 +31,18 @@ public class Graph extends JPanel {
 
 
     public Graph(ArrayList<GraphPoint> graphPoints, Color lineColor, Color pointColor) {
+        this.setFocusable(true);
         Collections.sort(graphPoints);
         this.graphPoints = graphPoints;
-        
+
         increaseScalableLabelPadding();
         setGraphColors(new Color(218, 218, 218), lineColor, pointColor);
-        
+
         this.setPreferredSize(new Dimension(100, 100));
-        this.setBounds(0, 0, width, height);
+        this.setBounds(positionX, positionY, width, height);
+        this.requestFocus();
+        this.addMouseListener(new MouseListenerGraph(this));
+
     }
 
     @Override
@@ -47,7 +51,7 @@ public class Graph extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         Stroke oldStroke = g2.getStroke();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-         
+
         setBackground(g2);
         setVerticallAxis(g2);
         setHorizontalAxis(g2);
@@ -55,14 +59,14 @@ public class Graph extends JPanel {
         setGraphLines(g2, oldStroke);
         setPointsOnGraph(g2, oldStroke);
     }
-    
-    void setBackground(Graphics2D g2){
-    	g2.setColor(Color.WHITE);
+
+    void setBackground(Graphics2D g2) {
+        g2.setColor(Color.WHITE);
         g2.fillRect(padding + xLabelPadding, padding, getWidth() - (2 * padding) - xLabelPadding,
                 getHeight() - 2 * padding - yLabelPadding);
         g2.setColor(Color.BLACK);
     }
-    
+
     void setVerticallAxis(Graphics2D g2) {
         int yDivision = 10;
         for (int i = 0; i < yDivision; i++) {
@@ -116,8 +120,8 @@ public class Graph extends JPanel {
                 getHeight() - padding - yLabelPadding);
     }
 
-    void setGraphLines(Graphics2D g2, Stroke oldStroke){
-    	g2.setColor(lineColor);
+    void setGraphLines(Graphics2D g2, Stroke oldStroke) {
+        g2.setColor(lineColor);
         g2.setStroke(new BasicStroke(2f));
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = padding + xLabelPadding
@@ -131,14 +135,13 @@ public class Graph extends JPanel {
             g2.drawLine(x1, (int) y1, x2, (int) y2);
         }
     }
-    
-    
+
     void setPointsOnGraph(Graphics2D g2, Stroke oldStroke) {
         g2.setStroke(oldStroke);
         g2.setColor(pointColor);
         for (int i = 0; i < graphPoints.size(); i++) {
-            int x = padding + xLabelPadding + (getWidth() - 2 * padding - xLabelPadding) * (i) / (graphPoints.size() - 1)
-                    - pointWidth / 2;
+            int x = padding + xLabelPadding
+                    + (getWidth() - 2 * padding - xLabelPadding) * (i) / (graphPoints.size() - 1) - pointWidth / 2;
             double y = ((double) (getHeight() - 2 * padding - yLabelPadding)
                     * (getMaxValue() - graphPoints.get(i).getY()) / (getMaxValue() - getMinValue())) + padding;
             int ovalW = pointWidth;
@@ -149,11 +152,17 @@ public class Graph extends JPanel {
     }
 
 
-    void setGraphColors(Color...colors) {
+    void setGraphColors(Color... colors) {
         this.setBackground(colors[0]);
         this.lineColor = colors[1];
         this.pointColor = colors[2];
-        
+    }
+
+    Color getRandomColor() {
+        int R = (int) (Math.random() * 256);
+        int G = (int) (Math.random() * 256);
+        int B = (int) (Math.random() * 256);
+        return new Color(R, G, B);
     }
 
     double getMaxValue() {
@@ -198,24 +207,25 @@ public class Graph extends JPanel {
         }
         return minValueArgument;
     }
-    
-    void increaseScalableLabelPadding(){
-    	int scalableIncrement = 0;
-    	int maxDigitNumber = 0;
-    	maxDigitNumber = String.valueOf(graphPoints.get(0).getY()).length();
-   
-    	for(GraphPoint gp: graphPoints){
-    		if(String.valueOf(gp.getY()).length() > maxDigitNumber)
-    			maxDigitNumber = String.valueOf(gp.getY()).length();
-    	}
-    	if(maxDigitNumber >3){
-    		for(int i = maxDigitNumber-3 ; i>= 0 ; i--){
-    			scalableIncrement+=6;
-    		}
-    	}
-    	
-    	this.xLabelPadding += scalableIncrement;
-    	this.width += scalableIncrement; 
+
+    void increaseScalableLabelPadding() {
+        int scalableIncrement = 0;
+        int maxDigitNumber = 0;
+        maxDigitNumber = String.valueOf(graphPoints.get(0).getY()).length();
+
+        for (GraphPoint gp : graphPoints) {
+            if (String.valueOf(gp.getY()).length() > maxDigitNumber)
+                maxDigitNumber = String.valueOf(gp.getY()).length();
+        }
+        if (maxDigitNumber > 3) {
+            for (int i = maxDigitNumber - 3; i >= 0; i--) {
+                scalableIncrement += 6;
+            }
+        }
+
+        this.xLabelPadding += scalableIncrement;
+        this.width += scalableIncrement;
     }
+
 
 }

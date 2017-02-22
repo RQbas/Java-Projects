@@ -32,6 +32,7 @@ public class MouseListenerWA implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent MouseReleased) {
         WorkArea.ReleasedCol = WorkArea.WorkTable.columnAtPoint(MouseReleased.getPoint());
+
         WorkArea.ReleasedRow = WorkArea.WorkTable.rowAtPoint(MouseReleased.getPoint());
     }
 
