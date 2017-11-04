@@ -10,4 +10,10 @@
     <string name="title_activity_devices_tab">DevicesTab</string>
     <string name="title_activity_tokens_tab">TokensTab</string>
     <string name="title_activity_logs_tab">LogsTab</string>
+    <string name="device_status_verification">Device status verification</string>
+    <string name="status">Status</string>
+    <string name="log">Logs</string>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
 </resources>

@@ -6,17 +6,17 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.Button;
 
 import com.app.verification.R;
 
 @TargetApi(11)
 public class MainActivity extends ActionBarActivity {
 
-    public Button buttonSettings;
-    public Button buttonStatus;
-    public Button buttonLogs;
+    public CardView buttonSettings;
+    public CardView buttonStatus;
+    public CardView buttonLogs;
     private SQLiteDatabase db;
 
 
@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setStatusButton() {
-        buttonStatus = (Button) findViewById(R.id.buttonStatus);
+        buttonStatus = (CardView) findViewById(R.id.buttonStatus);
         buttonStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setSettingButton() {
-        buttonSettings = (Button) findViewById(R.id.buttonSettings);
+        buttonSettings = (CardView) findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void setLogButton() {
-        buttonLogs = (Button) findViewById(R.id.buttonLogs);
+        buttonLogs = (CardView) findViewById(R.id.buttonLogs);
         buttonLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setExitButton() {
-        buttonLogs = (Button) findViewById(R.id.buttonExit);
+        buttonLogs = (CardView) findViewById(R.id.buttonExit);
         buttonLogs.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
