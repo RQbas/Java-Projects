@@ -8,9 +8,11 @@
         <item name="colorPrimary">@color/grayDark</item>
         <item name="android:textColorPrimary">@color/purpleDark</item>
         <item name="android:textColor">@color/purpleDark</item>
+        <item name="android:itemBackground">@color/grayMedium</item>
         <item name="colorPrimaryDark">@color/purpleDark</item>
         <item name="colorAccent">@color/grayLight</item>
     </style>
+
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
