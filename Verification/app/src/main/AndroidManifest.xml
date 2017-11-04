@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.verification"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="pl.kubas.rafal.activities.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="pl.kubas.rafal.activities.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
+            android:name="pl.kubas.rafal.activities.LogsActivity"
+            android:label="@string/title_activity_logs"></activity>
+        <activity
+            android:name="pl.kubas.rafal.activities.AdminActivity"
+            android:label="@string/title_activity_admin"></activity>
+        <activity
+            android:name="pl.kubas.rafal.activities.StatusActivity"
+            android:label="@string/title_activity_status"></activity>
+        <activity
+            android:name="pl.kubas.rafal.admin.PhoneTab"
+            android:label="@string/title_activity_admin_panel"></activity>
+        <activity
+            android:name="pl.kubas.rafal.admin.LogsTab"
+            android:label="LogsTab"></activity>
+        <activity
+            android:name="pl.kubas.rafal.admin.DevicesTab"
+            android:label="@string/title_activity_devices_tab"></activity>
+        <activity
+            android:name="pl.kubas.rafal.admin.TokensTab"
+            android:label="@string/title_activity_tokens_tab"></activity>
+    </application>
+
+</manifest>
