@@ -10,6 +10,8 @@
     <dimen name="weight_depending">0dp</dimen>
     <dimen name="main_button_width">132dp</dimen>
     <dimen name="main_button_height">54dp</dimen>
+    <dimen name="main_button_width_big">198dp</dimen>
+    <dimen name="main_button_height_big">108dp</dimen>
     <dimen name="main_button_margin_top">20dp</dimen>
     <dimen name="main_button_img_margin">5dp</dimen>
 </resources>

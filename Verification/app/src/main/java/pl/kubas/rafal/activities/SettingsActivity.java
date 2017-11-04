@@ -3,14 +3,14 @@ package pl.kubas.rafal.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +30,8 @@ public class SettingsActivity extends ActionBarActivity {
     DatabaseAdapter db;
 
     TextView settingsTextView;
-    EditText phoneTextField;
-    Button buttonSave;
+    TextInputEditText phoneTextField;
+    CardView buttonSave;
     ListView listNumbers;
     String ADMIN_PASS = "+1+";
     private List<PhoneNumber> numbers;
@@ -82,22 +82,22 @@ public class SettingsActivity extends ActionBarActivity {
 
 
     public void setPhoneTextField() {
-        phoneTextField = (EditText) findViewById(R.id.phoneNumberText);
+        phoneTextField = (TextInputEditText) findViewById(R.id.phoneNumberText);
         phoneTextField.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 
     public void setTextView() {
         settingsTextView = (TextView) findViewById(R.id.settingsTextView);
-        settingsTextView.setText("Enter phone number");
+        settingsTextView.setText("  Enter phone number  ");
     }
 
     public void setSaveButton() {
-        buttonSave = (Button) findViewById(R.id.buttonSaveNumber);
+        buttonSave = (CardView) findViewById(R.id.buttonSaveNumber);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String phoneNumber = phoneTextField.getText().toString();
-                numbers = new ArrayList<PhoneNumber>();
+                numbers = new ArrayList<>();
                 db.insertNumber(phoneNumber);
                 Toast.makeText(getBaseContext(), "Number added", Toast.LENGTH_LONG).show();
 
