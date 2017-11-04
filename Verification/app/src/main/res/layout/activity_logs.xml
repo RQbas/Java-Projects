@@ -15,7 +15,7 @@
         android:layout_height="@dimen/main_button_height"
         android:layout_margin="@dimen/main_button_margin_top"
         app:cardBackgroundColor="@color/grayDark"
-        app:cardCornerRadius="@dimen/carview_corner_radius">
+        app:cardCornerRadius="@dimen/cardview_corner_radius">
 
         <TextView
             android:id="@+id/logTextView"
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/main_button_margin_top"
         app:cardBackgroundColor="@color/grayDark"
-        app:cardCornerRadius="@dimen/carview_corner_radius_big">
+        app:cardCornerRadius="@dimen/cardview_corner_radius_big">
 
 
         <ListView

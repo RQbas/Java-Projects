@@ -9,7 +9,7 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/blue"
-    app:cardCornerRadius="@dimen/carview_corner_radius">
+    app:cardCornerRadius="@dimen/cardview_corner_radius">
 
     <LinearLayout
         android:layout_width="match_parent"

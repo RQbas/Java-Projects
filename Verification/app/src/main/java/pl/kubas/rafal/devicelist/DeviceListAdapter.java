@@ -2,15 +2,15 @@ package pl.kubas.rafal.devicelist;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.app.verification.R;
 
@@ -25,7 +25,7 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private Context context;
     ManagerSMS managerSMS;
     TextView deviceName;
-    Button statusButton;
+    ToggleButton statusButton;
     boolean isNumberProvided;
     DatabaseAdapter db;
 
@@ -77,7 +77,7 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         deviceName.setText(db.getAllDevices().get(position).getName());
 
 
-        statusButton = (Button) view.findViewById(R.id.statusButton);
+        statusButton = (ToggleButton) view.findViewById(R.id.statusButton);
         statusButton.setText(db.getAllDevices().get(position).displayForButton());
         statusButton.setTag(position);
         setButtonColor(db.getAllDevices().get(position).isOn());
@@ -140,9 +140,9 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
 
     void setButtonColor(boolean isOn) {
         if (isOn)
-            statusButton.setBackgroundColor(Color.rgb(255, 0, 0));
+            statusButton.setBackgroundColor(ContextCompat.getColor(context, R.color.blueDark));
         else
-            statusButton.setBackgroundColor(Color.rgb(0, 255, 0));
+            statusButton.setBackgroundColor(ContextCompat.getColor(context, R.color.blue));
 
     }
 

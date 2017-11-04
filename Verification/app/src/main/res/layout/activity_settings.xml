@@ -21,7 +21,7 @@
             android:layout_height="@dimen/main_button_height"
             android:layout_margin="@dimen/activity_vertical_margin"
             app:cardBackgroundColor="@color/grayDark"
-            app:cardCornerRadius="@dimen/carview_corner_radius">
+            app:cardCornerRadius="@dimen/cardview_corner_radius">
 
             <TextView
                 android:id="@+id/settingsTextView"
@@ -42,7 +42,7 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/blue"
-            app:cardCornerRadius="@dimen/carview_corner_radius">
+            app:cardCornerRadius="@dimen/cardview_corner_radius">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
