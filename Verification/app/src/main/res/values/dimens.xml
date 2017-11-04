@@ -5,6 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="main_header_ic_margin">15dp</dimen>
     <dimen name="main_header_text_size">25sp</dimen>
+    <dimen name="carview_corner_radius_big">20dp</dimen>
     <dimen name="carview_corner_radius">10dp</dimen>
     <dimen name="carview_corner_radius_small">3dp</dimen>
     <dimen name="weight_depending">0dp</dimen>
