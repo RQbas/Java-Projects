@@ -1,10 +1,9 @@
 package pl.kubas.rafal.admin;
 
-import com.app.verification.R;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
@@ -16,6 +15,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.verification.R;
+
 import pl.kubas.rafal.database.DatabaseAdapter;
 
 
@@ -45,7 +47,8 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -85,6 +88,7 @@ public class TokensTab extends AdminTab implements TabListener {
     public void setTextView() {
         tokenTextView = (TextView) findViewById(R.id.tokenTextView);
         tokenTextView.setText("Tokens");
+        tokenTextView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
     }
 
 

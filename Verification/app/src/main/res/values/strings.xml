@@ -15,9 +15,16 @@
     <string name="log">Logs</string>
     <string name="save">Save</string>
     <string name="phone_number">Phone Number</string>
+    <string name="device_name">Device name</string>
     <string name="settings">Settings</string>
     <string name="exit">Exit</string>
     <string name="delete_number">Delete number</string>
     <string name="clear_phone_table">Clear phone list</string>
-
+    <string name="clear_devices">Clear device list</string>
+    <string name="delete_device">Delete device</string>
+    <string name="add_device">Add device</string>
+    <string name="generate_new_set">Generate new set</string>
+    <string name="change_token_usage">Change token usage</string>
+    <string name="send_logs">Send logs via SMS</string>
+    <string name="clear_logs">Clear logs</string>
 </resources>

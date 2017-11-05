@@ -1,9 +1,5 @@
 package pl.kubas.rafal.admin;
 
-import java.util.List;
-
-import com.app.verification.R;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -15,10 +11,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.verification.R;
+
+import java.util.List;
+
 import pl.kubas.rafal.database.DatabaseAdapter;
 import pl.kubas.rafal.database.PhoneNumber;
 
@@ -51,7 +51,8 @@ public class PhoneTab extends AdminTab implements TabListener {
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -127,7 +128,7 @@ public class PhoneTab extends AdminTab implements TabListener {
 
 
     public void setNumberList() {
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllNumbers());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, db.getAllNumbers());
         listNumbers = (ListView) findViewById(R.id.listView);
         listNumbers.setAdapter(adapter);
         listNumbers.setSelector(android.R.color.darker_gray);
@@ -142,7 +143,6 @@ public class PhoneTab extends AdminTab implements TabListener {
         }
 
     }
-
 
 
 }
