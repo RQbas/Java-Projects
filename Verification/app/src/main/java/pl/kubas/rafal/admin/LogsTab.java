@@ -1,23 +1,24 @@
 package pl.kubas.rafal.admin;
 
-import java.util.List;
-
-import com.app.verification.R;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.verification.R;
+
+import java.util.List;
+
 import pl.kubas.rafal.database.DatabaseAdapter;
 import pl.kubas.rafal.database.Log;
 import pl.kubas.rafal.manager.ManagerSMS;
@@ -30,9 +31,9 @@ public class LogsTab extends AdminTab implements TabListener {
     TextView logTextView;
     ListView logList;
     List<Log> list;
-    Button clearLogsButton;
-    Button deleteLogButton;
-    Button sendLogSMSButton;
+    CardView clearLogsButton;
+    CardView deleteLogButton;
+    CardView sendLogSMSButton;
     Runnable runUpdater;
     ManagerSMS managerSMS;
     int selectedItemIndex = -1;
@@ -52,7 +53,8 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -93,7 +95,7 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     public void setClearLogsButton() {
-        clearLogsButton = (Button) findViewById(R.id.buttonClearLogsTable);
+        clearLogsButton = (CardView) findViewById(R.id.buttonClearLogsTable);
         clearLogsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +108,7 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     private void setSendLogSMSButton() {
-        clearLogsButton = (Button) findViewById(R.id.buttonSendLogSMS);
+        clearLogsButton = (CardView) findViewById(R.id.buttonSendLogSMS);
         clearLogsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +127,7 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     public void setLogList() {
-        adapter = new ArrayAdapter<Log>(this, android.R.layout.simple_list_item_1, db.getAllLogs());
+        adapter = new ArrayAdapter<Log>(this, R.layout.list_item, db.getAllLogs());
         logList = (ListView) findViewById(R.id.logList);
         logList.setAdapter(adapter);
         logList.setSelector(android.R.color.darker_gray);
