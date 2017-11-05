@@ -3,15 +3,14 @@ package pl.kubas.rafal.admin;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +24,8 @@ public class TokensTab extends AdminTab implements TabListener {
     final int tabID = 2;
     ActionBar adminBar;
     TextView tokenTextView;
-    Button changeTokenStatusButton;
-    Button generateNewSet;
+    CardView changeTokenStatusButton;
+    CardView generateNewSet;
     ListView listTokens;
     ArrayAdapter adapter;
     DatabaseAdapter db;
@@ -88,12 +87,11 @@ public class TokensTab extends AdminTab implements TabListener {
     public void setTextView() {
         tokenTextView = (TextView) findViewById(R.id.tokenTextView);
         tokenTextView.setText("Tokens");
-        tokenTextView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
     }
 
 
     private void setChangeTokenStatusButton() {
-        changeTokenStatusButton = (Button) findViewById(R.id.buttonChangeToken);
+        changeTokenStatusButton = (CardView) findViewById(R.id.buttonChangeToken);
         changeTokenStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +113,7 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
     private void setGenerateNewSetButton() {
-        changeTokenStatusButton = (Button) findViewById(R.id.buttonGenerateNewSet);
+        changeTokenStatusButton = (CardView) findViewById(R.id.buttonGenerateNewSet);
         changeTokenStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +129,7 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
     public void setTokenList() {
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, db.getAllTokensToString());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, db.getAllTokensToString());
         listTokens = (ListView) findViewById(R.id.listView);
         listTokens.setAdapter(adapter);
         listTokens.setSelector(android.R.color.darker_gray);
