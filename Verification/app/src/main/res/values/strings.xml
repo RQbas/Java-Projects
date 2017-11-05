@@ -17,4 +17,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="settings">Settings</string>
     <string name="exit">Exit</string>
+    <string name="delete_number">Delete number</string>
+    <string name="clear_phone_table">Clear phone list</string>
+
 </resources>

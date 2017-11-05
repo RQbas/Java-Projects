@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,8 +27,8 @@ import pl.kubas.rafal.database.PhoneNumber;
 public class PhoneTab extends AdminTab implements TabListener {
     final int tabID = 0;
     DatabaseAdapter db;
-    Button deleteButton;
-    Button clearPhoneButton;
+    CardView deleteButton;
+    CardView clearPhoneButton;
     TextView phoneTextView;
     ListView listNumbers;
     List<PhoneNumber> numbers;
@@ -91,7 +92,7 @@ public class PhoneTab extends AdminTab implements TabListener {
     }
 
     public void setClearPhoneButton() {
-        clearPhoneButton = (Button) findViewById(R.id.buttonClearPhoneTable);
+        clearPhoneButton = (CardView) findViewById(R.id.buttonClearPhoneTable);
         clearPhoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +105,7 @@ public class PhoneTab extends AdminTab implements TabListener {
 
 
     public void setDeleteButton() {
-        deleteButton = (Button) findViewById(R.id.buttonDeleteNumber);
+        deleteButton = (CardView) findViewById(R.id.buttonDeleteNumber);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -45,8 +45,9 @@
             app:cardCornerRadius="@dimen/cardview_corner_radius">
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/main_button_width"
+                android:layout_height="@dimen/main_button_height"
+                android:layout_gravity="center"
                 android:gravity="center_vertical|center_horizontal"
                 android:theme="@style/TextAppearance.App.TextInputLayout">
 
