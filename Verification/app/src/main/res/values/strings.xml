@@ -6,7 +6,7 @@
     <string name="title_activity_logs">Logs</string>
     <string name="title_activity_admin">Admin</string>
     <string name="title_activity_status">Status</string>
-    <string name="title_activity_admin_panel">AdminPanel</string>
+    <string name="title_activity_admin_panel">Admin</string>
     <string name="title_activity_devices_tab">DevicesTab</string>
     <string name="title_activity_tokens_tab">TokensTab</string>
     <string name="title_activity_logs_tab">LogsTab</string>
@@ -14,7 +14,7 @@
     <string name="status">STATUS</string>
     <string name="log">LOGS</string>
     <string name="save">Save</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="phone_number">PROVIDE PHONE NUMBER</string>
     <string name="device_name">Device name</string>
     <string name="settings">SETTINGS</string>
     <string name="exit">EXIT</string>

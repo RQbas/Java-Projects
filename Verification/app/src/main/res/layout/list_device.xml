@@ -13,6 +13,8 @@
         android:layout_marginLeft="@dimen/list_item_width_margin"
         android:layout_marginRight="@dimen/list_item_width_margin"
         android:layout_marginTop="@dimen/list_item_height_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/grayStatus"
         app:cardCornerRadius="@dimen/cardview_corner_radius">
 

@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.verification.R;
@@ -26,7 +25,6 @@ import pl.kubas.rafal.database.PhoneNumber;
 @SuppressLint("NewApi")
 public class SettingsActivity extends AppCompatActivity {
     private DatabaseAdapter db;
-    private TextView settingsTextView;
     private TextInputEditText phoneTextField;
     private CardView buttonSave;
     private List<PhoneNumber> numbers;
@@ -36,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setDatabase();
-        setTextView();
         setPhoneTextField();
         setSaveButton();
         setBackButton();
@@ -82,11 +79,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void setPhoneTextField() {
         phoneTextField = (TextInputEditText) findViewById(R.id.phoneNumberText);
         phoneTextField.setGravity(Gravity.CENTER_HORIZONTAL);
-    }
-
-    public void setTextView() {
-        settingsTextView = (TextView) findViewById(R.id.settingsTextView);
-        settingsTextView.setText("  Enter phone number  ");
     }
 
     public void setSaveButton() {
