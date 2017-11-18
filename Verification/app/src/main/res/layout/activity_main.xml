@@ -12,10 +12,10 @@
     tools:context="pl.kubas.rafal.activities.MainActivity">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/infoTransient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:id="@+id/infoTransient"
         android:transitionName="appInfo"
         app:cardBackgroundColor="@color/grayDark"
         app:cardCornerRadius="@dimen/cardview_corner_radius"
@@ -63,7 +63,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_gridview_element_margin">
+                android:layout_margin="@dimen/main_gridview_element_margin"
+                android:transitionName="statusTransient">
 
                 <include layout="@layout/status_button" />
             </LinearLayout>
@@ -71,7 +72,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_gridview_element_margin">
+                android:layout_margin="@dimen/main_gridview_element_margin"
+                android:transitionName="logsTransient">
 
                 <include layout="@layout/log_button" />
             </LinearLayout>
@@ -79,7 +81,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_gridview_element_margin">
+                android:layout_margin="@dimen/main_gridview_element_margin"
+                android:transitionName="settingsTransient">
 
                 <include layout="@layout/settings_button" />
 

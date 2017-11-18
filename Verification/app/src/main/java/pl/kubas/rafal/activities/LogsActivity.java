@@ -1,17 +1,17 @@
 package pl.kubas.rafal.activities;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.app.verification.R;
+
+import java.util.List;
 
 import pl.kubas.rafal.database.DatabaseAdapter;
 import pl.kubas.rafal.database.Log;
@@ -33,11 +33,26 @@ public class LogsActivity extends AppCompatActivity {
         setDatabase();
         setTextView();
         setLogList();
+        setBackButton();
     }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(LogsActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setBackButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setDatabase() {

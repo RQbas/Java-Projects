@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         buttonStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentStatus = new Intent(MainActivity.this, StatusActivity.class);
-                startActivity(intentStatus);
+                Intent intent = new Intent(getApplicationContext(), StatusActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "statusTransient");
+                startActivity(intent, options.toBundle());
             }
         });
     }
@@ -62,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intentSettings);
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "settingsTransient");
+                startActivity(intent, options.toBundle());
             }
         });
     }
@@ -74,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
         buttonLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogs = new Intent(MainActivity.this, LogsActivity.class);
-                startActivity(intentLogs);
+                Intent intent = new Intent(getApplicationContext(), LogsActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "logsTransient");
+                startActivity(intent, options.toBundle());
             }
         });
     }

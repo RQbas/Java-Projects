@@ -3,14 +3,15 @@ package pl.kubas.rafal.devicelist;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.app.verification.R;
 
@@ -23,14 +24,15 @@ import pl.kubas.rafal.manager.ManagerSMS;
 
 public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
     private Context context;
-    ManagerSMS managerSMS;
-    TextView deviceName;
-    ToggleButton statusButton;
-    boolean isNumberProvided;
-    DatabaseAdapter db;
+    private ManagerSMS managerSMS;
+    private TextView deviceName;
+    private CardView statusButton;
+    private ImageView statusOnOFF;
+    private boolean isNumberProvided;
+    private DatabaseAdapter db;
 
-    Device selectedDevice;
-    Log logSelectedDevice;
+    private Device selectedDevice;
+    private Log logSelectedDevice;
 
 
     public DeviceListAdapter(Context context, DatabaseAdapter db) {
@@ -38,6 +40,7 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         setContext(context);
         setManagerSMS();
     }
+
 
     private void setDatabaseAdapter(DatabaseAdapter db) {
         this.db = db;
@@ -73,14 +76,13 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_device, null);
         }
+        statusOnOFF = (ImageView) view.findViewById(R.id.statusOnOFF);
+        statusButton = (CardView) view.findViewById(R.id.statusButton);
         deviceName = (TextView) view.findViewById(R.id.deviceName);
+
         deviceName.setText(db.getAllDevices().get(position).getName());
-
-
-        statusButton = (ToggleButton) view.findViewById(R.id.statusButton);
-        statusButton.setText(db.getAllDevices().get(position).displayForButton());
         statusButton.setTag(position);
-        setButtonColor(db.getAllDevices().get(position).isOn());
+        setCardViewColor(db.getAllDevices().get(position).isOn());
 
         statusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +126,7 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
             }
 
             private void changeButtonDisplay() {
-                setButtonColor(selectedDevice.isOn());
-                statusButton.setText(selectedDevice.displayForButton());
+                setCardViewColor(selectedDevice.isOn());
             }
 
             private Token generateTokenSMS() {
@@ -138,12 +139,9 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
         return view;
     }
 
-    void setButtonColor(boolean isOn) {
-        if (isOn)
-            statusButton.setBackgroundColor(ContextCompat.getColor(context, R.color.blueDark));
-        else
-            statusButton.setBackgroundColor(ContextCompat.getColor(context, R.color.blue));
-
+    void setCardViewColor(boolean isOn) {
+        statusOnOFF.setImageDrawable(isOn ? context.getDrawable(R.drawable.ic_on) : context.getDrawable(R.drawable.ic_off));
+        deviceName.setTextColor(isOn ? ContextCompat.getColor(context, R.color.blue) : ContextCompat.getColor(context, R.color.grayDark));
     }
 
     private boolean isNumberProvided() {

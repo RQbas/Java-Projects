@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
@@ -47,8 +46,27 @@ public class SettingsActivity extends AppCompatActivity {
         setTextView();
         setPhoneTextField();
         setSaveButton();
+        setBackButton();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_settings:
+                Intent launchAdminPanel = new Intent(SettingsActivity.this, PhoneTab.class);
+                startActivity(launchAdminPanel);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setBackButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,20 +74,6 @@ public class SettingsActivity extends AppCompatActivity {
         return true;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            String pass = phoneTextField.getText().toString();
-            if (pass.equals("+1")) {
-                Intent launchAdminPanel = new Intent(SettingsActivity.this, PhoneTab.class);
-                startActivity(launchAdminPanel);
-            }
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public void onBackPressed() {
