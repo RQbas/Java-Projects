@@ -18,10 +18,10 @@ import pl.kubas.rafal.lists.LogListAdapter;
 
 @SuppressLint("NewApi")
 public class LogsActivity extends AppCompatActivity {
-    DatabaseAdapter db;
-    LogListAdapter adapter;
-    ListView logList;
-    List<Log> list;
+    private DatabaseAdapter db;
+    private LogListAdapter adapter;
+    private ListView logList;
+    private List<Log> list;
 
 
     @Override

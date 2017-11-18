@@ -24,19 +24,19 @@ import pl.kubas.rafal.database.Log;
 import pl.kubas.rafal.manager.ManagerSMS;
 
 public class LogsTab extends AdminTab implements TabListener {
-    final int tabID = 3;
-    ActionBar adminBar;
-    DatabaseAdapter db;
-    ArrayAdapter adapter;
-    TextView logTextView;
-    ListView logList;
-    List<Log> list;
-    CardView clearLogsButton;
-    CardView deleteLogButton;
-    CardView sendLogSMSButton;
-    Runnable runUpdater;
-    ManagerSMS managerSMS;
-    int selectedItemIndex = -1;
+    private final int tabID = 3;
+    private ActionBar adminBar;
+    private DatabaseAdapter db;
+    private ArrayAdapter adapter;
+    private TextView logTextView;
+    private ListView logList;
+    private List<Log> list;
+    private CardView clearLogsButton;
+    private CardView deleteLogButton;
+    private CardView sendLogSMSButton;
+    private Runnable runUpdater;
+    private ManagerSMS managerSMS;
+    private int selectedItemIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

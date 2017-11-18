@@ -21,16 +21,16 @@ import pl.kubas.rafal.database.DatabaseAdapter;
 
 
 public class TokensTab extends AdminTab implements TabListener {
-    final int tabID = 2;
-    ActionBar adminBar;
-    TextView tokenTextView;
-    CardView changeTokenStatusButton;
-    CardView generateNewSet;
-    ListView listTokens;
-    ArrayAdapter adapter;
-    DatabaseAdapter db;
-    Runnable run;
-    int selectedItemIndex = 0;
+    private final int tabID = 2;
+    private ActionBar adminBar;
+    private TextView tokenTextView;
+    private CardView changeTokenStatusButton;
+    private CardView generateNewSet;
+    private ListView listTokens;
+    private ArrayAdapter adapter;
+    private DatabaseAdapter db;
+    private Runnable run;
+    private int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

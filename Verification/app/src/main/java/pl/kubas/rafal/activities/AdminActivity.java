@@ -22,15 +22,15 @@ import pl.kubas.rafal.database.PhoneNumber;
 
 @SuppressLint("NewApi")
 public class AdminActivity extends AppCompatActivity {
-    DatabaseAdapter db;
-    Button deleteButton;
-    Button clearPhoneButton;
-    Button clearDeviceButton;
-    Button clearLogButton;
-    TextView adminTextView;
-    ListView listNumbers;
-    List<PhoneNumber> numbers;
-    ArrayAdapter adapter;
+    private DatabaseAdapter db;
+    private Button deleteButton;
+    private Button clearPhoneButton;
+    private Button clearDeviceButton;
+    private Button clearLogButton;
+    private TextView adminTextView;
+    private ListView listNumbers;
+    private List<PhoneNumber> numbers;
+    private ArrayAdapter adapter;
 
 
     @Override

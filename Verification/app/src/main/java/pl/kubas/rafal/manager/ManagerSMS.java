@@ -9,7 +9,7 @@ import pl.kubas.rafal.database.Token;
 public class ManagerSMS {
     public SmsManager smsManager;
     public String msg;
-    DatabaseAdapter db;
+    private DatabaseAdapter db;
 
     public ManagerSMS(DatabaseAdapter db) {
         this.db = db;

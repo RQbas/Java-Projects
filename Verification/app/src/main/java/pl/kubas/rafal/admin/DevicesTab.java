@@ -23,19 +23,18 @@ import pl.kubas.rafal.database.DatabaseAdapter;
 
 
 public class DevicesTab extends AdminTab implements TabListener {
-    final int tabID = 1;
-    DatabaseAdapter db;
-    CardView addButton;
-    CardView deleteButton;
-    CardView clearDeviceButton;
-    TextView deviceTextView;
-    EditText deviceNameField;
-    ListView listDevices;
-    ;
-    ArrayAdapter<String> adapter;
-    ActionBar adminBar;
-    Runnable run;
-    int selectedItemIndex = 0;
+    private final int tabID = 1;
+    private DatabaseAdapter db;
+    private CardView addButton;
+    private CardView deleteButton;
+    private CardView clearDeviceButton;
+    private TextView deviceTextView;
+    private EditText deviceNameField;
+    private ListView listDevices;
+    private ArrayAdapter<String> adapter;
+    private ActionBar adminBar;
+    private Runnable run;
+    private int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

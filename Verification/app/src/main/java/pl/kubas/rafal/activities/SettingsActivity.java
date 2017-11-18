@@ -10,8 +10,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,16 +25,11 @@ import pl.kubas.rafal.database.PhoneNumber;
 
 @SuppressLint("NewApi")
 public class SettingsActivity extends AppCompatActivity {
-    DatabaseAdapter db;
-
-    TextView settingsTextView;
-    TextInputEditText phoneTextField;
-    CardView buttonSave;
-    ListView listNumbers;
-    String ADMIN_PASS = "+1+";
+    private DatabaseAdapter db;
+    private TextView settingsTextView;
+    private TextInputEditText phoneTextField;
+    private CardView buttonSave;
     private List<PhoneNumber> numbers;
-
-    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

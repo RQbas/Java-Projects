@@ -25,17 +25,17 @@ import pl.kubas.rafal.database.PhoneNumber;
 
 @SuppressLint("NewApi")
 public class PhoneTab extends AdminTab implements TabListener {
-    final int tabID = 0;
-    DatabaseAdapter db;
-    CardView deleteButton;
-    CardView clearPhoneButton;
-    TextView phoneTextView;
-    ListView listNumbers;
-    List<PhoneNumber> numbers;
-    ArrayAdapter adapter;
-    ActionBar adminBar;
-    Runnable runUpdater;
-    int selectedItemIndex = 0;
+    private final int tabID = 0;
+    private DatabaseAdapter db;
+    private CardView deleteButton;
+    private CardView clearPhoneButton;
+    private TextView phoneTextView;
+    private ListView listNumbers;
+    private List<PhoneNumber> numbers;
+    private ArrayAdapter adapter;
+    private ActionBar adminBar;
+    private Runnable runUpdater;
+    private int selectedItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
