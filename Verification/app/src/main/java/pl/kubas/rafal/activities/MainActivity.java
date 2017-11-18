@@ -5,18 +5,20 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
 import com.app.verification.R;
 
 @TargetApi(11)
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
-    public CardView buttonSettings;
-    public CardView buttonStatus;
-    public CardView buttonLogs;
+    private CardView buttonInfo;
+    private CardView buttonSettings;
+    private CardView buttonStatus;
+    private CardView buttonLogs;
     private SQLiteDatabase db;
 
 
@@ -24,10 +26,24 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setInfoButton();
         setSettingButton();
         setStatusButton();
         setLogButton();
         setExitButton();
+    }
+
+    public void setInfoButton() {
+        buttonStatus = (CardView) findViewById(R.id.infoTransient);
+        buttonStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), InfoTransient.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "appInfo");
+                startActivity(intent, options.toBundle());
+            }
+        });
     }
 
     public void setStatusButton() {

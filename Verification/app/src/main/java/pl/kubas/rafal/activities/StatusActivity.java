@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +16,7 @@ import pl.kubas.rafal.devicelist.DeviceListAdapter;
 
 
 @SuppressLint("NewApi")
-public class StatusActivity extends ActionBarActivity {
+public class StatusActivity extends AppCompatActivity {
     ListView deviceList;
     TextView statusTextView;
     DeviceListAdapter adapterDL;

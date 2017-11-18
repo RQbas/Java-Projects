@@ -3,9 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="blueDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="grayLight">#d6d6de</color>
+    <color name="grayLight">#F6F6F6</color>
     <color name="grayMedium">#bfbfbf</color>
-    <color name="grayDark">#96939b</color>
+    <color name="grayDark">#8f8e91</color>
     <color name="grayStatus">#c1c1c1</color>
     <color name="purpleDark">#564256</color>
     <color name="blue">#4286f4</color>
@@ -13,4 +13,9 @@
     <color name="white">#ffff</color>
     <color name="green">#22c23b</color>
     <color name="red">#c23b22</color>
+    <color name="orangeLight">#FB8070</color>
+    <color name="cyanLight">#64D1D8</color>
+    <color name="mainButtonGrayLight">#D3D7DA</color>
+    <color name="mainButtonGrayDark">#6B7888</color>
+    <color name="lime">#64C485</color>
 </resources>

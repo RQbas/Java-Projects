@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import pl.kubas.rafal.database.Log;
 
 
 @SuppressLint("NewApi")
-public class LogsActivity extends ActionBarActivity {
+public class LogsActivity extends AppCompatActivity {
     DatabaseAdapter db;
     ArrayAdapter adapter;
     TextView logTextView;

@@ -114,7 +114,11 @@ public class LogsTab extends AdminTab implements TabListener {
             public void onClick(View view) {
                 if (isAnyItemSelected()) {
                     managerSMS.setMSG(adapter.getItem(selectedItemIndex).toString());
-                    managerSMS.sendSMS();
+                    try {
+                        managerSMS.sendSMS();
+                    } catch (Exception e) {
+                        Toast.makeText(getBaseContext(), "Problem with SMS sending", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Toast.makeText(getBaseContext(), "Log not selected", Toast.LENGTH_LONG).show();
                 }

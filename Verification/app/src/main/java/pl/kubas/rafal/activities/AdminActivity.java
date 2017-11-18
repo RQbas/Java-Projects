@@ -5,6 +5,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,7 +21,7 @@ import pl.kubas.rafal.database.PhoneNumber;
 
 
 @SuppressLint("NewApi")
-public class AdminActivity extends ActionBarActivity {
+public class AdminActivity extends AppCompatActivity {
     DatabaseAdapter db;
     Button deleteButton;
     Button clearPhoneButton;

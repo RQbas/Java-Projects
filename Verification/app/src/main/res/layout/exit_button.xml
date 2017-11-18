@@ -3,33 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/buttonExit"
     android:layout_width="@dimen/main_button_width"
-    android:layout_height="@dimen/main_button_height"
-    android:layout_marginTop="@dimen/main_button_margin_top"
+    android:layout_height="@dimen/main_button_width"
+    android:layout_margin="@dimen/cardview_elevation_margin"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/blue"
-    app:cardCornerRadius="@dimen/cardview_corner_radius">
+    app:cardBackgroundColor="@color/mainButtonGrayDark"
+    app:cardElevation="@dimen/cardview_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="1">
 
         <ImageView
-            android:layout_width="@dimen/weight_depending"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/weight_depending"
+            android:layout_marginBottom="@dimen/main_button_img_margin"
             android:layout_marginLeft="@dimen/main_button_img_margin"
             android:layout_marginRight="@dimen/main_button_img_margin"
-            android:layout_weight="0.4"
+            android:layout_weight="0.9"
             android:src="@drawable/ic_exit" />
 
         <TextView
-            android:layout_width="@dimen/weight_depending"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:gravity="left|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:gravity="top"
             android:text="@string/exit"
             android:textColor="@color/white"
             android:textStyle="bold" />

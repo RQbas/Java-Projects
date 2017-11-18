@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.Menu;
@@ -26,7 +27,7 @@ import pl.kubas.rafal.database.PhoneNumber;
 
 
 @SuppressLint("NewApi")
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
     DatabaseAdapter db;
 
     TextView settingsTextView;

@@ -11,13 +11,13 @@
     <string name="title_activity_tokens_tab">TokensTab</string>
     <string name="title_activity_logs_tab">LogsTab</string>
     <string name="device_status_verification">Device status verification</string>
-    <string name="status">Status</string>
-    <string name="log">Logs</string>
+    <string name="status">STATUS</string>
+    <string name="log">LOGS</string>
     <string name="save">Save</string>
     <string name="phone_number">Phone Number</string>
     <string name="device_name">Device name</string>
-    <string name="settings">Settings</string>
-    <string name="exit">Exit</string>
+    <string name="settings">SETTINGS</string>
+    <string name="exit">EXIT</string>
     <string name="delete_number">Delete number</string>
     <string name="clear_phone_table">Clear phone list</string>
     <string name="clear_devices">Clear device list</string>
@@ -27,4 +27,8 @@
     <string name="change_token_usage">Change token usage</string>
     <string name="send_logs">Send logs via SMS</string>
     <string name="clear_logs">Clear logs</string>
+    <string name="info_header_1">Appication used to mark statuses of declared devices\n</string>
+    <string name="info_header_2">There is possibility to delcare device and change\n its status\n</string>
+    <string name="info_header_3">Every change creates simple log containing informations about status and time\n</string>
+    <string name="info_header_4">During status change log wil be send to the declared phone number\n</string>
 </resources>

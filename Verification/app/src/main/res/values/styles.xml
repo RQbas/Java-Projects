@@ -6,10 +6,10 @@
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/grayDark</item>
-        <item name="android:textColorPrimary">@color/purpleDark</item>
-        <item name="android:textColor">@color/purpleDark</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:itemBackground">@color/grayMedium</item>
-        <item name="colorPrimaryDark">@color/purpleDark</item>
+        <item name="colorPrimaryDark">@color/grayDark</item>
         <item name="colorAccent">@color/grayLight</item>
     </style>
 

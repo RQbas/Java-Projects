@@ -4,11 +4,14 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,28 +29,29 @@
         </activity>
         <activity
             android:name="pl.kubas.rafal.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name="pl.kubas.rafal.activities.LogsActivity"
-            android:label="@string/title_activity_logs"></activity>
+            android:label="@string/title_activity_logs" />
         <activity
             android:name="pl.kubas.rafal.activities.AdminActivity"
-            android:label="@string/title_activity_admin"></activity>
+            android:label="@string/title_activity_admin" />
         <activity
             android:name="pl.kubas.rafal.activities.StatusActivity"
-            android:label="@string/title_activity_status"></activity>
+            android:label="@string/title_activity_status" />
         <activity
             android:name="pl.kubas.rafal.admin.PhoneTab"
-            android:label="@string/title_activity_admin_panel"></activity>
+            android:label="@string/title_activity_admin_panel" />
         <activity
             android:name="pl.kubas.rafal.admin.LogsTab"
-            android:label="LogsTab"></activity>
+            android:label="LogsTab" />
         <activity
             android:name="pl.kubas.rafal.admin.DevicesTab"
-            android:label="@string/title_activity_devices_tab"></activity>
+            android:label="@string/title_activity_devices_tab" />
         <activity
             android:name="pl.kubas.rafal.admin.TokensTab"
-            android:label="@string/title_activity_tokens_tab"></activity>
+            android:label="@string/title_activity_tokens_tab" />
+        <activity android:name="pl.kubas.rafal.activities.InfoTransient"></activity>
     </application>
 
 </manifest>
