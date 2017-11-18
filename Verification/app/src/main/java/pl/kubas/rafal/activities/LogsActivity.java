@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.app.verification.R;
 
@@ -15,13 +13,13 @@ import java.util.List;
 
 import pl.kubas.rafal.database.DatabaseAdapter;
 import pl.kubas.rafal.database.Log;
+import pl.kubas.rafal.lists.LogListAdapter;
 
 
 @SuppressLint("NewApi")
 public class LogsActivity extends AppCompatActivity {
     DatabaseAdapter db;
-    ArrayAdapter adapter;
-    TextView logTextView;
+    LogListAdapter adapter;
     ListView logList;
     List<Log> list;
 
@@ -31,7 +29,6 @@ public class LogsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logs);
         setDatabase();
-        setTextView();
         setLogList();
         setBackButton();
     }
@@ -60,15 +57,12 @@ public class LogsActivity extends AppCompatActivity {
         db.open();
     }
 
-    public void setTextView() {
-        logTextView = (TextView) findViewById(R.id.logTextView);
-        logTextView.setText("Logs");
-    }
 
     public void setLogList() {
-        adapter = new ArrayAdapter<Log>(this, android.R.layout.simple_list_item_1, db.getAllLogs());
+        adapter = new LogListAdapter(this, db);
         logList = (ListView) findViewById(R.id.logList);
         logList.setAdapter(adapter);
 
     }
+
 }

@@ -1,4 +1,4 @@
-package pl.kubas.rafal.devicelist;
+package pl.kubas.rafal.lists;
 
 import android.content.Context;
 import android.content.Intent;

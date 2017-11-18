@@ -7,12 +7,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.app.verification.R;
 
 import pl.kubas.rafal.database.DatabaseAdapter;
-import pl.kubas.rafal.devicelist.DeviceListAdapter;
+import pl.kubas.rafal.lists.DeviceListAdapter;
 
 
 @SuppressLint("NewApi")

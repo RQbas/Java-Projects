@@ -128,7 +128,7 @@ public class PhoneTab extends AdminTab implements TabListener {
 
 
     public void setNumberList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, db.getAllNumbers());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_log, db.getAllNumbers());
         listNumbers = (ListView) findViewById(R.id.listView);
         listNumbers.setAdapter(adapter);
         listNumbers.setSelector(android.R.color.darker_gray);

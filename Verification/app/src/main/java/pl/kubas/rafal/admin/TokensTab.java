@@ -129,7 +129,7 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
     public void setTokenList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, db.getAllTokensToString());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_log, db.getAllTokensToString());
         listTokens = (ListView) findViewById(R.id.listView);
         listTokens.setAdapter(adapter);
         listTokens.setSelector(android.R.color.darker_gray);

@@ -13,6 +13,7 @@
     <dimen name="main_button_height">54dp</dimen>
     <dimen name="list_item_height">75dp</dimen>
     <dimen name="list_item_width_margin">10dp</dimen>
+    <dimen name="list_item_height_margin">5dp</dimen>
     <dimen name="main_button_width_big">198dp</dimen>
     <dimen name="main_button_height_big">108dp</dimen>
     <dimen name="main_button_margin">20dp</dimen>

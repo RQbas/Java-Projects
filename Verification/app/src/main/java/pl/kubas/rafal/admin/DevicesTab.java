@@ -156,7 +156,7 @@ public class DevicesTab extends AdminTab implements TabListener {
     }
 
     public void setDeviceList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, db.getAllDevicesToString());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_log, db.getAllDevicesToString());
         listDevices = (ListView) findViewById(R.id.listView);
         listDevices.setAdapter(adapter);
         listDevices.setSelector(android.R.color.darker_gray);

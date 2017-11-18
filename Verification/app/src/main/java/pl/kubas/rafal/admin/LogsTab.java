@@ -131,7 +131,7 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     public void setLogList() {
-        adapter = new ArrayAdapter<Log>(this, R.layout.list_item, db.getAllLogs());
+        adapter = new ArrayAdapter<Log>(this, R.layout.list_log, db.getAllLogs());
         logList = (ListView) findViewById(R.id.logList);
         logList.setAdapter(adapter);
         logList.setSelector(android.R.color.darker_gray);
