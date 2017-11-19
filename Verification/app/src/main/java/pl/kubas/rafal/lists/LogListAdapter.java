@@ -1,6 +1,7 @@
 package pl.kubas.rafal.lists;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.app.verification.R;
 
 import pl.kubas.rafal.database.DatabaseAdapter;
-import pl.kubas.rafal.database.Log;
 
 public class LogListAdapter extends BaseAdapter implements ListAdapter {
     private TextView logTextView;
@@ -59,7 +59,13 @@ public class LogListAdapter extends BaseAdapter implements ListAdapter {
         }
         logCardView = (CardView) view.findViewById(R.id.log_cardview);
         logTextView = (TextView) view.findViewById(R.id.log_text);
-        logTextView.setText(db.getAllLogs().get(position).toString());
+        String textLog = db.getAllLogs().get(position).toString();
+        if (textLog.contains("ON")) {
+            logTextView.setTextColor(ContextCompat.getColor(context, R.color.lime));
+        } else {
+            logTextView.setTextColor(ContextCompat.getColor(context, R.color.grayDark));
+        }
+        logTextView.setText(textLog);
 
 
         return view;

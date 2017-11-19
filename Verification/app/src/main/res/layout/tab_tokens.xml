@@ -1,54 +1,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:background="@color/grayLight"
     android:gravity="center"
     android:orientation="vertical">
 
-
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/main_button_width_big"
-        android:layout_height="@dimen/main_button_height"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        app:cardBackgroundColor="@color/grayDark"
-        app:cardCornerRadius="@dimen/cardview_corner_radius">
-
-        <TextView
-            android:id="@+id/tokenTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="bold" />
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <include layout="@layout/token_usage_button"></include>
-
-        <include layout="@layout/token_new_set_button"></include>
-
-    </LinearLayout>
-
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        app:cardBackgroundColor="@color/blue"
-        app:cardCornerRadius="@dimen/cardview_corner_radius_big">
+        android:layout_height="@dimen/weight_depending"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_weight="0.8"
+        app:cardBackgroundColor="@color/grayMedium"
+        app:cardElevation="@dimen/cardview_elevation">
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"></ListView>
+            android:clickable="true"
+            android:divider="@color/cyanLight"
+            android:dividerHeight="3px">
+
+        </ListView>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/weight_depending"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_weight="0.2"
+        app:cardBackgroundColor="@color/grayMedium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <include layout="@layout/token_usage_button"></include>
+
+            <include layout="@layout/token_new_set_button"></include>
+
+
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 

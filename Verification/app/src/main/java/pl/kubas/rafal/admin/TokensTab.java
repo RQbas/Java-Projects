@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.verification.R;
@@ -23,7 +22,6 @@ import pl.kubas.rafal.database.DatabaseAdapter;
 public class TokensTab extends AdminTab implements TabListener {
     private final int tabID = 2;
     private ActionBar adminBar;
-    private TextView tokenTextView;
     private CardView changeTokenStatusButton;
     private CardView generateNewSet;
     private ListView listTokens;
@@ -38,7 +36,6 @@ public class TokensTab extends AdminTab implements TabListener {
         setContentView(R.layout.tab_tokens);
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
-        setTextView();
         setChangeTokenStatusButton();
         setGenerateNewSetButton();
         setTokenList();
@@ -84,11 +81,6 @@ public class TokensTab extends AdminTab implements TabListener {
         runOnUiThread(run);
     }
 
-    public void setTextView() {
-        tokenTextView = (TextView) findViewById(R.id.tokenTextView);
-        tokenTextView.setText("Tokens");
-    }
-
 
     private void setChangeTokenStatusButton() {
         changeTokenStatusButton = (CardView) findViewById(R.id.buttonChangeToken);
@@ -129,7 +121,7 @@ public class TokensTab extends AdminTab implements TabListener {
     }
 
     public void setTokenList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_log, db.getAllTokensToString());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_text, db.getAllTokensToString());
         listTokens = (ListView) findViewById(R.id.listView);
         listTokens.setAdapter(adapter);
         listTokens.setSelector(android.R.color.darker_gray);

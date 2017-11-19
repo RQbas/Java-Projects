@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.verification.R;
@@ -29,7 +28,6 @@ public class PhoneTab extends AdminTab implements TabListener {
     private DatabaseAdapter db;
     private CardView deleteButton;
     private CardView clearPhoneButton;
-    private TextView phoneTextView;
     private ListView listNumbers;
     private List<PhoneNumber> numbers;
     private ArrayAdapter adapter;
@@ -43,7 +41,6 @@ public class PhoneTab extends AdminTab implements TabListener {
         setContentView(R.layout.tab_phone);
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
-        setTextView();
         setDeleteButton();
         setClearPhoneButton();
         setNumberList();
@@ -85,11 +82,6 @@ public class PhoneTab extends AdminTab implements TabListener {
 
     private void updateDeviceList() {
         runOnUiThread(runUpdater);
-    }
-
-    public void setTextView() {
-        phoneTextView = (TextView) findViewById(R.id.phoneTextView);
-        phoneTextView.setText("Phone numbers panel");
     }
 
     public void setClearPhoneButton() {
@@ -139,8 +131,6 @@ public class PhoneTab extends AdminTab implements TabListener {
                 selectedItemIndex = position;
             }
         });
-        {
-        }
 
     }
 

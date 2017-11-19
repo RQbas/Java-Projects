@@ -141,7 +141,7 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
 
     void setCardViewColor(boolean isOn) {
         statusOnOFF.setImageDrawable(isOn ? context.getDrawable(R.drawable.ic_on) : context.getDrawable(R.drawable.ic_off));
-        deviceName.setTextColor(isOn ? ContextCompat.getColor(context, R.color.blue) : ContextCompat.getColor(context, R.color.grayDark));
+        deviceName.setTextColor(isOn ? ContextCompat.getColor(context, R.color.orangeLight) : ContextCompat.getColor(context, R.color.grayDark));
     }
 
     private boolean isNumberProvided() {

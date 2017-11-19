@@ -5,10 +5,11 @@
     android:layout_width="@dimen/main_button_width"
     android:layout_height="@dimen/main_button_height"
     android:layout_gravity="center"
-    android:layout_margin="@dimen/activity_vertical_margin"
+    android:layout_margin="@dimen/main_button_margin"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/blue"
+    app:cardBackgroundColor="@color/cyanLight"
+    app:cardElevation="@dimen/cardview_elevation"
     app:cardCornerRadius="@dimen/cardview_corner_radius">
 
     <LinearLayout

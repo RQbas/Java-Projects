@@ -67,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        finish();
     }
 
     private void setDatabase() {

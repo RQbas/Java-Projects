@@ -16,7 +16,10 @@
     <dimen name="list_item_height_margin">5dp</dimen>
     <dimen name="main_button_width_big">198dp</dimen>
     <dimen name="main_button_height_big">108dp</dimen>
+    <dimen name="dialog_width">256dp</dimen>
+    <dimen name="dialog_height">208dp</dimen>
     <dimen name="main_button_margin">20dp</dimen>
+    <dimen name="dialog_input_horizontal_margin">30dp</dimen>
     <dimen name="main_gridview_element_margin">10dp</dimen>
     <dimen name="main_button_img_margin">5dp</dimen>
     <dimen name="cardview_elevation">5dp</dimen>

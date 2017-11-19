@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/main_gridview_element_margin"
                 android:transitionName="statusTransient">
-
                 <include layout="@layout/status_button" />
             </LinearLayout>
 

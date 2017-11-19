@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.verification.R;
@@ -28,7 +27,6 @@ public class LogsTab extends AdminTab implements TabListener {
     private ActionBar adminBar;
     private DatabaseAdapter db;
     private ArrayAdapter adapter;
-    private TextView logTextView;
     private ListView logList;
     private List<Log> list;
     private CardView clearLogsButton;
@@ -44,7 +42,6 @@ public class LogsTab extends AdminTab implements TabListener {
         setContentView(R.layout.tab_logs);
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
-        setTextView();
         setClearLogsButton();
         setSendLogSMSButton();
         setLogList();
@@ -89,11 +86,6 @@ public class LogsTab extends AdminTab implements TabListener {
         runOnUiThread(runUpdater);
     }
 
-    public void setTextView() {
-        logTextView = (TextView) findViewById(R.id.logTextView);
-        logTextView.setText("Logs");
-    }
-
     public void setClearLogsButton() {
         clearLogsButton = (CardView) findViewById(R.id.buttonClearLogsTable);
         clearLogsButton.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +123,7 @@ public class LogsTab extends AdminTab implements TabListener {
     }
 
     public void setLogList() {
-        adapter = new ArrayAdapter<Log>(this, R.layout.list_log, db.getAllLogs());
+        adapter = new ArrayAdapter<Log>(this, R.layout.list_text, db.getAllLogs());
         logList = (ListView) findViewById(R.id.logList);
         logList.setAdapter(adapter);
         logList.setSelector(android.R.color.darker_gray);

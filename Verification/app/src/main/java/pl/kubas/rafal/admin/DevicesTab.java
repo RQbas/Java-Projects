@@ -7,19 +7,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.widget.CardView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.verification.R;
 
 import pl.kubas.rafal.database.DatabaseAdapter;
+import pl.kubas.rafal.dialogs.NewDeviceDialog;
 
 
 public class DevicesTab extends AdminTab implements TabListener {
@@ -28,8 +26,6 @@ public class DevicesTab extends AdminTab implements TabListener {
     private CardView addButton;
     private CardView deleteButton;
     private CardView clearDeviceButton;
-    private TextView deviceTextView;
-    private EditText deviceNameField;
     private ListView listDevices;
     private ArrayAdapter<String> adapter;
     private ActionBar adminBar;
@@ -42,14 +38,19 @@ public class DevicesTab extends AdminTab implements TabListener {
         setContentView(R.layout.tab_devices);
         super.setActionBar(adminBar, this, tabID);
         setDatabase();
-        setTextView();
         setDeviceList();
         setAddButton();
-        setDeviceNameField();
         setDeleteButton();
         setClearDeviceButton();
         setDeviceListUpdater();
+    }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            runOnUiThread(run);
+        }
     }
 
     @Override
@@ -90,17 +91,6 @@ public class DevicesTab extends AdminTab implements TabListener {
         runOnUiThread(run);
     }
 
-    public void setTextView() {
-        deviceTextView = (TextView) findViewById(R.id.deviceTextView);
-        deviceTextView.setText("Devices panel");
-    }
-
-    public void setDeviceNameField() {
-        deviceNameField = (EditText) findViewById(R.id.deviceNameField);
-        deviceNameField.setGravity(Gravity.CENTER_HORIZONTAL);
-    }
-
-
     public void setClearDeviceButton() {
         clearDeviceButton = (CardView) findViewById(R.id.buttonClearDeviceTable);
         clearDeviceButton.setOnClickListener(new View.OnClickListener() {
@@ -119,17 +109,9 @@ public class DevicesTab extends AdminTab implements TabListener {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String deviceName = deviceNameField.getText().toString();
-                try {
-                    db.insertDevice(deviceName, false);
-                    Toast.makeText(getBaseContext(), "Device added", Toast.LENGTH_LONG).show();
-                    deviceNameField.getText().clear();
-                    updateDeviceList();
-                } catch (Exception e) {
-                }
+                new NewDeviceDialog(DevicesTab.this, db);
             }
         });
-
     }
 
     public void setDeleteButton() {
@@ -155,7 +137,7 @@ public class DevicesTab extends AdminTab implements TabListener {
     }
 
     public void setDeviceList() {
-        adapter = new ArrayAdapter<String>(this, R.layout.list_log, db.getAllDevicesToString());
+        adapter = new ArrayAdapter<String>(this, R.layout.list_text, db.getAllDevicesToString());
         listDevices = (ListView) findViewById(R.id.listView);
         listDevices.setAdapter(adapter);
         listDevices.setSelector(android.R.color.darker_gray);

@@ -1,7 +1,6 @@
 package pl.kubas.rafal.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -35,7 +34,7 @@ public class LogsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(LogsActivity.this, MainActivity.class));
+        finish();
     }
 
     @Override
