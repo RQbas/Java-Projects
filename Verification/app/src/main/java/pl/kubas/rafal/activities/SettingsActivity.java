@@ -43,11 +43,11 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
                 finish();
                 return true;
             case R.id.action_settings:
-                Intent launchAdminPanel = new Intent(SettingsActivity.this, PhoneTab.class);
-                startActivity(launchAdminPanel);
+                startActivity(new Intent(SettingsActivity.this, PhoneTab.class));
                 finish();
                 return true;
         }

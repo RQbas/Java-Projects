@@ -86,18 +86,19 @@ public class AdminTab extends ActionBarActivity implements TabListener {
             switch (index) {
                 case 0:
                     startActivity(new Intent(context, PhoneTab.class));
+                    finish();
                     break;
                 case 1:
                     startActivity(new Intent(context, DevicesTab.class));
+                    finish();
                     break;
                 case 2:
                     startActivity(new Intent(context, TokensTab.class));
+                    finish();
                     break;
                 case 3:
                     startActivity(new Intent(context, LogsTab.class));
-                    break;
-                default:
-                    startActivity(new Intent(context, SettingsActivity.class));
+                    finish();
                     break;
             }
         }

@@ -44,7 +44,7 @@
             android:label="@string/title_activity_admin_panel" />
         <activity
             android:name="pl.kubas.rafal.admin.LogsTab"
-            android:label="LogsTab" />
+            android:label="@string/title_activity_logs_tab" />
         <activity
             android:name="pl.kubas.rafal.admin.DevicesTab"
             android:label="@string/title_activity_devices_tab" />
