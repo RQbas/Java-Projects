@@ -87,9 +87,13 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phoneNumber = phoneTextField.getText().toString();
-                numbers = new ArrayList<>();
-                db.insertNumber(phoneNumber);
-                Toast.makeText(getBaseContext(), "Number added", Toast.LENGTH_LONG).show();
+                if (!phoneNumber.equals("")) {
+                    numbers = new ArrayList<>();
+                    db.insertNumber(phoneNumber);
+                    Toast.makeText(getBaseContext(), "Number added", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "Number cannot be empty", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

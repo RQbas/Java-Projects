@@ -122,7 +122,11 @@ public class DeviceListAdapter extends BaseAdapter implements ListAdapter {
 
             private void manageSendingSMS() {
                 managerSMS.setMSG(logSelectedDevice, generateTokenSMS());
-                managerSMS.sendSMS();
+                try {
+                    managerSMS.sendSMS();
+                } catch (Exception e) {
+                    Toast.makeText(context, "Problem with SMS sending", Toast.LENGTH_LONG).show();
+                }
             }
 
             private void changeButtonDisplay() {
