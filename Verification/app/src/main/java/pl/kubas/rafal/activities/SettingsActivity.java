@@ -92,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
                     db.insertNumber(phoneNumber);
                     Toast.makeText(getBaseContext(), "Number added", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getBaseContext(), "Number cannot be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Number cannot be empty6", Toast.LENGTH_LONG).show();
                 }
 
             }

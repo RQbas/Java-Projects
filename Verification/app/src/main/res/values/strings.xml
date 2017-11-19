@@ -27,8 +27,8 @@
     <string name="change_token_usage">Change token usage</string>
     <string name="send_logs">Send logs via SMS</string>
     <string name="clear_logs">Clear logs</string>
-    <string name="info_header_1">Appication used to mark statuses of declared devices\n</string>
+    <string name="info_header_1">Application used to mark statuses of declared devices\n</string>
     <string name="info_header_2">There is possibility to declare device and change\n its status\n</string>
     <string name="info_header_3">Every change creates simple log containing informations about status and creation time\n</string>
-    <string name="info_header_4">During status change log wil be send to the declared phone number\n</string>
+    <string name="info_header_4">During status change log wil be send to the first declared phone number\n</string>
 </resources>
